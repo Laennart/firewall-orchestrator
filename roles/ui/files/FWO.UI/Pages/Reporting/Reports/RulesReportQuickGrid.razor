@@ -1,0 +1,71 @@
+﻿@inject UserConfig userConfig
+@using FWO.Report
+@using FWO.Ui.Display
+@using Microsoft.AspNetCore.Components.QuickGrid
+
+@if(Loading){
+    <div class="spinner-border text-primary align-self-center mt-3" role="status"></div>
+}
+else
+{
+    <QuickGrid Items="@Rules" Class="table-bordered th-bg-secondary overflow-auto">
+        <PropertyColumn Property="@(rule => rule.DisplayOrderNumberString)" Sortable="true" IsDefaultSortColumn="true" Title="@(userConfig.GetText("number"))" />
+        <PropertyColumn Property="@(rule => rule.Name)" Sortable="true" Title="@(userConfig.GetText("name"))" />
+        <TemplateColumn Title="@(userConfig.GetText("source_zone"))" Sortable="true">
+            @((MarkupString)RuleDisplayHtml.DisplaySourceZone(context))
+        </TemplateColumn>
+        <TemplateColumn Title="@(userConfig.GetText("source"))">
+            @((MarkupString)RuleDisplay.DisplaySource(context, getActLocation(), SelectedReportType))
+        </TemplateColumn>
+        <TemplateColumn Title="@(userConfig.GetText("destination"))">
+            @((MarkupString)RuleDisplay.DisplayDestination(context, getActLocation(), SelectedReportType))
+        </TemplateColumn>
+        <TemplateColumn Title="@(userConfig.GetText("services"))">
+            @((MarkupString)RuleDisplay.DisplayServices(context, getActLocation(), SelectedReportType))
+        </TemplateColumn>
+        <TemplateColumn Title="@(userConfig.GetText("enabled"))">
+            @((MarkupString)RuleDisplayHtml.DisplayEnabled(context, getActLocation()))
+        </TemplateColumn>
+        <TemplateColumn Title="@(userConfig.GetText("enforcing_devices"))">
+            @((MarkupString)RuleDisplay.DisplayEnforcingGateways(context, getActLocation(), SelectedReportType))
+        </TemplateColumn>
+        <PropertyColumn Property="@(rule => rule.Uid)" Sortable="true" Title="@(userConfig.GetText("uid"))" />
+        <PropertyColumn Property="@(rule => rule.Comment)" Sortable="true" Title="@(userConfig.GetText("comment"))" />
+    </QuickGrid>
+}
+
+@code {
+    [Parameter]
+    public ReportType SelectedReportType { get; set; }
+
+    [Parameter]
+    public List<ManagementReport> Managements { get; set; } = new();
+
+    IQueryable<Rule> Rules;
+    private NatRuleDisplayHtml? RuleDisplay;
+
+    private bool Recertification { get; set; } = false;
+    private bool Loading { get; set; } = true;
+
+    protected override void OnInitialized()
+    {
+        RuleDisplay = new NatRuleDisplayHtml(userConfig);
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        var management = Managements.Select(mgt => new ManagementReportController(mgt)).First();
+        var device = management.Devices.Select(dev => DeviceReportController.FromDeviceReport(dev)).First();
+
+        Rules = ReportRules.GetAllRulesOfGateway(device, management).AsQueryable();
+
+        Loading = false;
+
+        StateHasChanged();
+    }
+
+    private OutputLocation getActLocation()
+    {
+        return Recertification ? OutputLocation.certification : OutputLocation.report;
+    }
+}
