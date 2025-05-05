@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization; 
+using System.Text.Json.Serialization;
+using FWO.Data.Report;
 using Newtonsoft.Json;
 
 namespace FWO.Data
@@ -98,12 +99,20 @@ namespace FWO.Data
         [JsonProperty("rule_enforced_on_gateways"), JsonPropertyName("rule_enforced_on_gateways")]
         public DeviceWrapper[] EnforcingGateways { get; set; } = [];
 
+        public bool ViewCollapse { get; set; }
+
         public string DisplayOrderNumberString { get; set; } = "";
         public int DisplayOrderNumber { get; set; }
         public bool Certified { get; set; }
         public string ManagementName = "";
         public string DeviceName { get; set; } = "";
         public string RulebaseName { get; set; } = "";
+        public int RulebaseLevel {
+            get
+            {
+                return CustomVersion.GetDeepnessLevel(DisplayOrderNumberString);
+            }
+        }
         public NetworkLocation[] DisregardedFroms { get; set; } = [];
         public NetworkLocation[] DisregardedTos { get; set; } = [];
         public NetworkService[] DisregardedServices { get; set; } = [];
