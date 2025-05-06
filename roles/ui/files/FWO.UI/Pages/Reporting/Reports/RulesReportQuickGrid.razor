@@ -8,8 +8,19 @@
 }
 else
 {
-    <QuickGrid Items="@Rules" Class="table-bordered th-bg-secondary overflow-auto">
-        <PropertyColumn Property="@(rule => rule.DisplayOrderNumberString)" Sortable="true" IsDefaultSortColumn="true" Title="@(userConfig.GetText("number"))" />
+    @*     <QuickGrid Items="@Rules" Class="table-bordered th-bg-secondary">
+        <TemplateColumn Sortable="true" IsDefaultSortColumn="true" Title="@(userConfig.GetText("number"))">
+            @if(new CustomVersion(context.DisplayOrderNumberString).Parts.Last() > 1)
+            {
+                context.ViewCollapsed = true;
+            }
+            <div class="d-flex justify-content-between collapse">
+                <button type="button" class="btn btn-sm" @onclick="@(() => context.ViewCollapsed = !context.ViewCollapsed)">
+                    <span class="@(context.ViewCollapsed ? Icons.CollapseDown : Icons.CollapseUp)"></span>
+                </button>
+                @context.DisplayOrderNumberString
+            </div>
+        </TemplateColumn>
         <PropertyColumn Property="@(rule => rule.Name)" Sortable="true" Title="@(userConfig.GetText("name"))" />
         <TemplateColumn Title="@(userConfig.GetText("source_zone"))" Sortable="true">
             @((MarkupString)RuleDisplayHtml.DisplaySourceZone(context))
@@ -31,7 +42,7 @@ else
         </TemplateColumn>
         <PropertyColumn Property="@(rule => rule.Uid)" Sortable="true" Title="@(userConfig.GetText("uid"))" />
         <PropertyColumn Property="@(rule => rule.Comment)" Sortable="true" Title="@(userConfig.GetText("comment"))" />
-    </QuickGrid>
+    </QuickGrid> *@
 }
 
 @code {
@@ -42,6 +53,8 @@ else
     public List<ManagementReport> Managements { get; set; } = new();
 
     IQueryable<Rule> Rules;
+    private List<RowBase> DisplayRows;
+    IQueryable<RowBase> RulesDisplay;
     private NatRuleDisplayHtml? RuleDisplay;
 
     private bool Recertification { get; set; } = false;
@@ -54,10 +67,36 @@ else
 
     protected override void OnAfterRender(bool firstRender)
     {
+        if(!firstRender)
+        {
+            return;
+        }
+
         var management = Managements.Select(mgt => new ManagementReportController(mgt)).First();
         var device = management.Devices.Select(dev => DeviceReportController.FromDeviceReport(dev)).First();
 
         Rules = ReportRules.GetAllRulesOfGateway(device, management).AsQueryable();
+
+        var grouped = CustomVersion.GroupByLevel(Rules);
+
+        DisplayRows = new List<RowBase>();
+
+        foreach(var group in grouped)
+        {
+            var groupHeader = new GroupHeaderRow { GroupKey = group.Key };
+            DisplayRows.Add(groupHeader);
+
+            foreach(var item in group)
+            {
+                DisplayRows.Add(new DataRow
+                    {
+                        Rule = item,
+                        ParentGroup = groupHeader
+                    });
+            }
+        }
+
+        RulesDisplay = DisplayRows.AsQueryable();
 
         Loading = false;
 

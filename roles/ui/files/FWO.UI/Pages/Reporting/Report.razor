@@ -102,7 +102,7 @@
 
         @* ==== Report main div ==== *@
         <div class="card me-1 ms-1 mb-1 shadow">
-            <div class="card-body">
+            <div class="card-body overflow-auto">
                 @if (currentReport != null)
                 {
                     @switch (currentReport.ReportType)
@@ -114,8 +114,8 @@
                         case ReportType.UnusedRules:
                         case ReportType.NatRules:
                         case ReportType.AppRules:
-                            <RulesReport Managements="currentReport.ReportData.ManagementData" SelectedReportType="actReportFilters.ReportType" RulesPerPage="rulesPerPage"
-                                @bind-SelectedRules="selectedItemsRuleReportTable" />
+                            @* <RulesReport Managements="currentReport.ReportData.ManagementData" SelectedReportType="actReportFilters.ReportType" RulesPerPage="rulesPerPage"
+                                @bind-SelectedRules="selectedItemsRuleReportTable" /> *@
                             <RulesReportQuickGrid Managements="currentReport.ReportData.ManagementData"></RulesReportQuickGrid>
                             break;
 
