@@ -10,7 +10,7 @@ namespace FWO.Config.File
         /// <summary>
         /// Path to config file
         /// </summary>
-        private const string basePath = "/etc/fworch";
+        private const string basePath = "/Users/lennart/Dev/wws/firewall-orchestrator-config";
         private const string configPath = basePath + "/fworch.json";
 
         /// <summary>

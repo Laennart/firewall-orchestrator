@@ -7,9 +7,9 @@ namespace FWO.Logging
 {
     public static class Log
     {
-        private static SemaphoreSlim semaphore = new(1, 1);
-        private static readonly string lockFilePath = $"/var/fworch/lock/{Assembly.GetEntryAssembly()?.GetName().Name}_log.lock";
-        private static readonly Random random = new();
+        private static SemaphoreSlim semaphore = new (1, 1);
+        private static readonly string lockFilePath = $"/Users/lennart/Dev/wws/firewall-orchestrator-config/{Assembly.GetEntryAssembly()?.GetName().Name}_log.lock";
+        private static readonly Random random = new ();
 
         static Log()
         {
