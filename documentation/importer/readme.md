@@ -84,3 +84,9 @@ Ruff format ( only needed for VS, but also run pre-commit)
 ```
 ruff format
 ```
+
+Pyright type check
+
+```
+pyright
+```
