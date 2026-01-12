@@ -9,6 +9,10 @@
 		<PackageReference Include="IPAddressRange" Version="6.3.0" />
 		<PackageReference Include="BlazorTable" Version="1.17.0" />
 		<PackageReference Include="PuppeteerSharp" Version="20.2.2" />
+		<PackageReference Include="Roslynator.Analyzers" Version="4.15.0">
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		  <PrivateAssets>all</PrivateAssets>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>

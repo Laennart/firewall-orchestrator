@@ -19,4 +19,11 @@
         <ProjectReference Include="..\FWO.Report\FWO.Report.csproj" />
         <ProjectReference Include="..\FWO.Services\FWO.Services.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Roslynator.Analyzers" Version="4.15.0">
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        <PrivateAssets>all</PrivateAssets>
+      </PackageReference>
+    </ItemGroup>
 </Project>

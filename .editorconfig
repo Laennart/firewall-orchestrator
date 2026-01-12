@@ -14,3 +14,169 @@ insert_final_newline = true
 [*.razor]
 indent_style = space
 indent_size = 4
+
+
+[*.cs]
+
+########## Severity baseline ##########
+
+dotnet_analyzer_diagnostic.severity = suggestion # Default severity for analyzers not explicitly configured
+
+########## .NET analyzers ##########
+
+dotnet_diagnostic.CA1000.severity = suggestion # Do not declare static members on generic types
+
+dotnet_diagnostic.CA1014.severity = warning # Mark assemblies with CLSCompliantAttribute
+
+dotnet_diagnostic.CA1028.severity = warning # Enum storage type should be Int32
+
+dotnet_diagnostic.CA1031.severity = warning # Do not catch general exception types
+
+dotnet_diagnostic.CA1051.severity = warning # Do not declare visible instance fields
+
+dotnet_diagnostic.CA1062.severity = warning # Validate arguments of public methods
+
+dotnet_diagnostic.CA1305.severity = warning # Specify IFormatProvider when converting types to string
+
+dotnet_diagnostic.CA1307.severity = warning # Specify StringComparison for string comparisons
+
+dotnet_diagnostic.CA1707.severity = none # Identifiers should not contain underscores (disabled intentionally)
+
+dotnet_diagnostic.CA1822.severity = suggestion # Mark members as static if they do not access instance data
+ś
+
+########## Performance analyzers ##########
+
+dotnet_diagnostic.CA1806.severity = warning # Do not ignore method results
+
+dotnet_diagnostic.CA1816.severity = warning # Dispose IDisposable objects properly
+
+dotnet_diagnostic.CA1826.severity = warning # Do not use Enumerable methods on indexable collections
+
+dotnet_diagnostic.CA1848.severity = suggestion # Use LoggerMessage delegates for high-performance logging
+
+########## Roslynator rules ##########
+
+dotnet_diagnostic.RCS1001.severity = suggestion # Simplify boolean expressions
+
+dotnet_diagnostic.RCS1002.severity = suggestion # Remove redundant boolean literals
+
+dotnet_diagnostic.RCS1003.severity = suggestion # Remove redundant parentheses
+
+dotnet_diagnostic.RCS1007.severity = suggestion # Simplify logical negation
+
+dotnet_diagnostic.RCS1018.severity = suggestion # Simplify lambda expression
+
+dotnet_diagnostic.RCS1021.severity = suggestion # Convert lambda expression body to expression-body
+
+dotnet_diagnostic.RCS1047.severity = suggestion # Remove redundant parentheses in expression
+
+dotnet_diagnostic.RCS1075.severity = suggestion # Avoid empty catch blocks
+
+########## Roslynator – correctness ##########
+
+dotnet_diagnostic.RCS1085.severity = warning # Use auto-property instead of full property when possible
+
+dotnet_diagnostic.RCS1090.severity = warning # Call 'ConfigureAwait(false)' on awaited task
+
+dotnet_diagnostic.RCS1102.severity = warning # Make class static if it contains only static members
+
+dotnet_diagnostic.RCS1138.severity = warning # Add summary documentation comment
+
+########## Roslynator – performance ##########
+
+dotnet_diagnostic.RCS1181.severity = suggestion # Convert foreach loop to LINQ method
+
+dotnet_diagnostic.RCS1207.severity = warning # Use Array.Empty<T>() instead of new T[0]
+
+dotnet_diagnostic.RCS1224.severity = warning # Use StringBuilder instead of string concatenation in loops
+
+########## Compiler-enforced correctness ##########
+
+dotnet_diagnostic.CS8600.severity = error # Converting null literal or possible null value to non-nullable type
+
+dotnet_diagnostic.CS8602.severity = error # Dereference of a possibly null reference
+
+dotnet_diagnostic.CS8603.severity = error # Possible null reference return
+
+dotnet_diagnostic.CS8618.severity = error # Non-nullable field is uninitialized
+
+dotnet_diagnostic.CS4014.severity = error # Call is not awaited (possible fire-and-forget bug)
+
+########## Code style ##########
+
+csharp_style_var_for_built_in_types = true:suggestion # Use 'var' for built-in types when obvious
+
+csharp_style_var_when_type_is_apparent = true:suggestion # Use 'var' when the type is obvious from the right side
+
+csharp_style_var_elsewhere = false:suggestion # Do not use 'var' when type is not obvious
+
+csharp_style_expression_bodied_methods = when_on_single_line:suggestion # Use expression-bodied methods only when single-line
+
+csharp_style_expression_bodied_properties = true:suggestion # Prefer expression-bodied properties
+
+csharp_style_expression_bodied_constructors = false:suggestion # Do not use expression-bodied constructors
+
+csharp_style_prefer_pattern_matching = true:suggestion # Prefer pattern matching over traditional checks
+
+csharp_style_prefer_switch_expression = true:suggestion # Prefer switch expressions over switch statements
+
+csharp_style_throw_expression = true:suggestion # Prefer throw expressions where possible
+
+csharp_style_conditional_delegate_call = true:suggestion # Prefer null-conditional delegate invocation
+
+dotnet_sort_system_directives_first = true # Place System.* using directives first
+
+dotnet_separate_import_directive_groups = true # Separate using directive groups with blank lines
+
+########## Qualification ##########
+
+dotnet_style_qualification_for_field = false:suggestion # Do not require 'this.' for fields
+
+dotnet_style_qualification_for_property = false:suggestion # Do not require 'this.' for properties
+
+dotnet_style_qualification_for_method = false:suggestion # Do not require 'this.' for methods
+
+dotnet_style_qualification_for_event = false:suggestion # Do not require 'this.' for events
+
+########## Naming rules ##########
+
+dotnet_naming_rule.interfaces_should_be_prefixed_with_i.severity = warning # Interfaces must start with 'I'
+
+dotnet_naming_rule.interfaces_should_be_prefixed_with_i.symbols = interfaces
+dotnet_naming_rule.interfaces_should_be_prefixed_with_i.style = prefix_interface
+
+dotnet_naming_symbols.interfaces.applicable_kinds = interface
+dotnet_naming_symbols.interfaces.applicable_accessibilities = public, internal
+
+dotnet_naming_style.prefix_interface.required_prefix = I
+dotnet_naming_style.prefix_interface.capitalization = pascal_case
+
+dotnet_naming_rule.private_fields_should_be_camel_case.severity = suggestion # Private fields should use _camelCase
+
+dotnet_naming_rule.private_fields_should_be_camel_case.symbols = private_fields
+dotnet_naming_rule.private_fields_should_be_camel_case.style = camel_case_underscore
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+
+dotnet_naming_style.camel_case_underscore.required_prefix = _
+dotnet_naming_style.camel_case_underscore.capitalization = camel_case
+
+########################################
+# Tests
+########################################
+[*.Tests.cs]
+dotnet_analyzer_diagnostic.severity = suggestion
+# Relax rules for test code
+
+########################################
+# Generated code
+########################################
+[*.g.cs]
+dotnet_analyzer_diagnostic.severity = none
+# Disable analyzers for generated code
+
+[*.Designer.cs]
+dotnet_analyzer_diagnostic.severity = none
+# Disable analyzers for designer-generated files
