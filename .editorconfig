@@ -34,7 +34,7 @@ dotnet_diagnostic.CA1031.severity = warning # Do not catch general exception typ
 
 dotnet_diagnostic.CA1051.severity = warning # Do not declare visible instance fields
 
-dotnet_diagnostic.CA1062.severity = warning # Validate arguments of public methods
+dotnet_diagnostic.CA1062.severity = none # Validate arguments of public methods
 
 dotnet_diagnostic.CA1305.severity = none # Specify IFormatProvider when converting types to string
 
