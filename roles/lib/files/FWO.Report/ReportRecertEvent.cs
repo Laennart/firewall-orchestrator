@@ -1,3 +1,6 @@
+using System.Text;
+using System.Text.Json;
+
 using FWO.Api.Client;
 using FWO.Api.Client.Queries;
 using FWO.Basics;
@@ -5,8 +8,6 @@ using FWO.Config.Api;
 using FWO.Data.Report;
 using FWO.Logging;
 using FWO.Report.Filter;
-using System.Text;
-using System.Text.Json;
 
 namespace FWO.Report
 {

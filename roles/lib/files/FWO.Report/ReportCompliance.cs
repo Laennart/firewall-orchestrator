@@ -1,3 +1,8 @@
+using System.Collections.Generic;
+using System.Reflection;
+using System.Text;
+using System.Text.Json;
+
 using FWO.Api.Client;
 using FWO.Api.Client.Queries;
 using FWO.Basics;
@@ -9,10 +14,6 @@ using FWO.Logging;
 using FWO.Report.Data.ViewData;
 using FWO.Report.Filter;
 using FWO.Ui.Display;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
-using System.Text.Json;
 
 namespace FWO.Report
 {
@@ -20,12 +21,12 @@ namespace FWO.Report
     {
 
         #region Properties
-        
+
         public List<Rule> Rules { get; set; } = [];
         public List<RuleViewData> RuleViewData = [];
         public List<ComplianceViolation> Violations { get; set; } = [];
         public bool ShowNonImpactRules { get; set; }
-        public List<Management> Managements  { get; set; } = [];
+        public List<Management> Managements { get; set; } = [];
         protected virtual string InternalQuery => RuleQueries.getRulesWithCurrentViolationsByChunk;
         protected DebugConfig DebugConfig;
 
@@ -71,7 +72,7 @@ namespace FWO.Report
             SetUpCsvExport();
 
             _maxPrintedViolations = _globalConfig.ComplianceCheckMaxPrintedViolations;
-            
+
             // Apply debug config.
 
             if (!string.IsNullOrEmpty(_globalConfig.DebugConfig))
@@ -199,7 +200,7 @@ namespace FWO.Report
 
             return csvString;
         }
-        
+
         public override string SetDescription()
         {
             return "Compliance Report";
@@ -363,7 +364,7 @@ namespace FWO.Report
         #endregion
 
         #region Methods - Private
-        
+
         private void SetUpCsvExport()
         {
             _includeHeaderInExport = true;
@@ -416,7 +417,7 @@ namespace FWO.Report
                     {
                         resolvedNetworkLocations.Add(new NetworkLocation(networkLocation.User, groupFlat.Object)); // adding user only for syntax
                     }
-                }                               
+                }
             }
 
             return Task.CompletedTask;
@@ -426,7 +427,7 @@ namespace FWO.Report
         {
             if (results == null)
             {
-                results = [];   
+                results = [];
             }
             RuleViewData.Capacity = results.Sum(r => r.viewData.Count);
             List<Rule> processedRulesFlat = new(results.Sum(r => r.processed.Count));
@@ -471,7 +472,7 @@ namespace FWO.Report
 
             return queryVariables;
         }
-        
+
         protected virtual void SetComplianceDataForRule(Rule rule, ApiConnection apiConnection, Func<ComplianceViolation, string>? formatter = null)
         {
             try
@@ -494,7 +495,7 @@ namespace FWO.Report
                 }
 
                 foreach (ComplianceViolation violation in violations)
-                {   
+                {
                     // Cut violation details when printed violations limit is reached.
 
                     if (_maxPrintedViolations > 0 && addedViolationDetails == _maxPrintedViolations)
@@ -529,7 +530,7 @@ namespace FWO.Report
                     {
                         violationDetails = formatter(violation);
                     }
-                    
+
                     rule.ViolationDetails += violationDetails;
                     addedViolationDetails++;
                 }
@@ -572,7 +573,7 @@ namespace FWO.Report
 
             return string.Join(_separator, values.Select(value => $"\"{value}\""));
         }
-        
+
         private string TransformHtmlToCsv(string propertyName, string htmlInput)
         {
             if (propertyName == "Enabled")

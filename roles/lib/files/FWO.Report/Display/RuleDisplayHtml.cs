@@ -1,7 +1,8 @@
-using FWO.Basics;
-using FWO.Data;
-using FWO.Config.Api;
 using System.Text;
+
+using FWO.Basics;
+using FWO.Config.Api;
+using FWO.Data;
 using FWO.Report;
 
 namespace FWO.Ui.Display

@@ -1,7 +1,9 @@
+using System.Text.Json.Serialization;
+
 using FWO.Basics;
 using FWO.Data.Middleware;
-using Newtonsoft.Json; 
-using System.Text.Json.Serialization; 
+
+using Newtonsoft.Json;
 
 namespace FWO.Data
 {
@@ -50,7 +52,7 @@ namespace FWO.Data
         [JsonProperty("ldap_searchpath_for_groups"), JsonPropertyName("ldap_searchpath_for_groups")]
         public string? GroupSearchPath { get; set; }
 
-       [JsonProperty("ldap_writepath_for_groups"), JsonPropertyName("ldap_writepath_for_groups")]
+        [JsonProperty("ldap_writepath_for_groups"), JsonPropertyName("ldap_writepath_for_groups")]
         public string? GroupWritePath { get; set; }
 
         [JsonProperty("ldap_write_user"), JsonPropertyName("ldap_write_user")]
@@ -69,7 +71,7 @@ namespace FWO.Data
         public bool Active { get; set; } = true;
 
         public LdapConnectionBase()
-        {}
+        { }
 
         public LdapConnectionBase(LdapConnectionBase ldapConnection)
         {
@@ -135,7 +137,7 @@ namespace FWO.Data
         {
             return Address != "" ? Address + ":" + Port : "";
         }
-        
+
         public bool IsWritable()
         {
             return WriteUser != null && WriteUser != "";

@@ -1,6 +1,7 @@
-﻿using FWO.Api.Client;
+using FWO.Api.Client;
 using FWO.Data;
 using FWO.Logging;
+
 using RestSharp;
 
 namespace FWO.DeviceAutoDiscovery

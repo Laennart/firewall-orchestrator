@@ -1,14 +1,16 @@
-﻿using FWO.Basics;
-using FWO.Logging;
+using System.Net;
+using System.Text.Json;
+
 using FWO.Api.Client;
 using FWO.Api.Client.Queries;
+using FWO.Basics;
+using FWO.Basics.Exceptions;
 using FWO.Config.Api;
 using FWO.Data;
+using FWO.Logging;
 using FWO.Services;
-using System.Text.Json;
-using FWO.Basics.Exceptions;
+
 using NetTools;
-using System.Net;
 
 namespace FWO.Middleware.Server
 {
@@ -92,7 +94,7 @@ namespace FWO.Middleware.Server
 
         private async Task<string> ImportMatrix(ImportNwZoneMatrixData importedMatrix, string importfileName)
         {
-            counters = new(){ AllZones = importedMatrix.NetworkZones.Count };
+            counters = new() { AllZones = importedMatrix.NetworkZones.Count };
             if (MatrixId == 0)
             {
                 await CreateMatrix(importedMatrix.Name, importfileName, importedMatrix.Comment);
@@ -258,8 +260,8 @@ namespace FWO.Middleware.Server
             {
                 // Dont allow auto-calculated undefine-internal to have allowed communications.
 
-                if (globalConfig.AutoCalculateInternetZone 
-                    && globalConfig.AutoCalculateUndefinedInternalZone 
+                if (globalConfig.AutoCalculateInternetZone
+                    && globalConfig.AutoCalculateUndefinedInternalZone
                     && incomingZoneData.CommData.Any(communication => communication.IdString == "AUTO_CALCULATED_ZONE_UNDEFINED_INTERNAL"))
                 {
                     throw new ArgumentException("Matrix contains allowed communication data for readonly auto-calculated undefined-internal zone.");
@@ -270,8 +272,8 @@ namespace FWO.Middleware.Server
 
                 NetworkZoneService.AdditionsDeletions addDel = new()
                 {
-                    DestinationZonesToAdd = incomingDestZoneIds.Except(existDestZoneIds).ToList().ConvertAll(i => new ComplianceNetworkZone(){ Id = i }),
-                    DestinationZonesToDelete = existDestZoneIds.Except(incomingDestZoneIds).ToList().ConvertAll(i => new ComplianceNetworkZone(){ Id = i })
+                    DestinationZonesToAdd = incomingDestZoneIds.Except(existDestZoneIds).ToList().ConvertAll(i => new ComplianceNetworkZone() { Id = i }),
+                    DestinationZonesToDelete = existDestZoneIds.Except(incomingDestZoneIds).ToList().ConvertAll(i => new ComplianceNetworkZone() { Id = i })
                 };
                 await NetworkZoneService.UpdateZone(existingZone, addDel, apiConnection);
                 return (addDel.DestinationZonesToAdd.Count, addDel.DestinationZonesToDelete.Count);

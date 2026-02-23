@@ -1,15 +1,16 @@
-using FWO.Basics;
 using System.Text.RegularExpressions;
+
+using FWO.Basics;
 
 namespace FWO.Data
 {
-    public class Sanitizer
+    public static class Sanitizer
     {
         // Standard input fields
         public static string SanitizeMand(string input, ref bool shortened)
         {
             string output = Regex.Replace(input, @"[^\w\.\*\-\:\?@/\(\)\[\]\{\}\$\+<>#\$ ]", "").Trim();
-            if(output.Length < input.Length)
+            if (output.Length < input.Length)
             {
                 shortened = true;
             }
@@ -30,7 +31,7 @@ namespace FWO.Data
         public static string SanitizeLdapNameMand(string input, ref bool shortened)
         {
             string output = Regex.Replace(input, @"[^\w\.\*\-\:\?@/\(\) ]", "").Trim();
-            if(output.Length < input.Length)
+            if (output.Length < input.Length)
             {
                 shortened = true;
             }
@@ -51,7 +52,7 @@ namespace FWO.Data
         public static string SanitizeLdapPathMand(string input, ref bool shortened)
         {
             string output = Regex.Replace(input, @"[^\w\.\*\-\:\?@/\(\)\=\, \\]", "").Trim();
-            if(output.Length < input.Length)
+            if (output.Length < input.Length)
             {
                 shortened = true;
             }
@@ -72,7 +73,7 @@ namespace FWO.Data
         public static string SanitizePasswMand(string input, ref bool shortened)
         {
             string output = Regex.Replace(input, @"[^\S ]", "").Trim();
-            if(output.Length < input.Length)
+            if (output.Length < input.Length)
             {
                 shortened = true;
             }
@@ -93,7 +94,7 @@ namespace FWO.Data
         public static string SanitizeKeyMand(string input, ref bool shortened)
         {
             string output = input.Trim();
-            if(output.Length < input.Length)
+            if (output.Length < input.Length)
             {
                 shortened = true;
             }
@@ -112,7 +113,7 @@ namespace FWO.Data
         // Comments may contain everything but quotes (EOL chars are allowed)
         public static string? SanitizeCommentOpt(string? input, ref bool shortened)
         {
-            if (input!=null)
+            if (input != null)
             {
                 return SanitizeCommentMand(input, ref shortened);
             }
@@ -123,11 +124,11 @@ namespace FWO.Data
         {
             string output = Regex.Replace(input, @"[""'']", "").Trim();
             string ignorableChangeCompareString = output + "\n";
-            if (input!=null)
+            if (input != null)
             {
-                if(output.Length < input.Length) // there is always an EOL char added in text fields
+                if (output.Length < input.Length) // there is always an EOL char added in text fields
                 {
-                    if(ignorableChangeCompareString != input )
+                    if (ignorableChangeCompareString != input)
                     {
                         shortened = true;
                     }
@@ -140,7 +141,7 @@ namespace FWO.Data
         public static string SanitizeCidrMand(string input, ref bool shortened)
         {
             string output = Regex.Replace(input, @"[^a-fA-F0-9\.\:/]", "").Trim();
-            if(output.Length < input.Length)
+            if (output.Length < input.Length)
             {
                 shortened = true;
             }
@@ -159,7 +160,7 @@ namespace FWO.Data
         public static string SanitizeJsonMand(string input, ref bool shortened)
         {
             string output = Regex.Replace(input, @"[^\S ]", "").Trim();
-            if(output.Length < input.Length)
+            if (output.Length < input.Length)
             {
                 shortened = true;
             }
@@ -170,7 +171,7 @@ namespace FWO.Data
         public static string SanitizeJsonFieldMand(string input, ref bool changed)
         {
             string output = Regex.Replace(input.Trim(), @"[\+\*\(\)\{\}\[\]\?\!#<>\=\,\;\/\\\t@\$\%\^\|\&\~ ]", "_");
-            if(output != input)
+            if (output != input)
             {
                 changed = true;
             }
@@ -180,7 +181,7 @@ namespace FWO.Data
         public static string SanitizeEolMand(string input, ref bool shortened)
         {
             string output = Regex.Replace(input, @"[\n\r]", " ").Trim();
-            if(output.Length < input.Length)
+            if (output.Length < input.Length)
             {
                 shortened = true;
             }

@@ -1,9 +1,10 @@
-using FWO.Basics;
-using FWO.Data;
-using FWO.Config.Api;
 using System.Text;
-using FWO.Report.Filter;
 using System.Text.RegularExpressions;
+
+using FWO.Basics;
+using FWO.Config.Api;
+using FWO.Data;
+using FWO.Report.Filter;
 
 namespace FWO.Ui.Display
 {
@@ -14,7 +15,7 @@ namespace FWO.Ui.Display
 
         public string OutputCsv(string? input)
         {
-            return  $"\"{input ?? ""}\",";
+            return $"\"{input ?? ""}\",";
         }
 
         public string DisplayNumberCsv(Rule rule)
@@ -76,7 +77,7 @@ namespace FWO.Ui.Display
         {
             return OutputCsv(DisplayComment(rule));
         }
-       
+
 
         public new string DisplayName(Rule rule)
         {
@@ -87,7 +88,7 @@ namespace FWO.Ui.Display
         {
             return rule.Comment != null ? SanitizeComment(rule.Comment) : "";
         }
-        
+
         public string DisplayEnabled(Rule rule)
         {
             return rule.Disabled ? "disabled" : "enabled";
@@ -114,12 +115,12 @@ namespace FWO.Ui.Display
                     displayedServices.Add(DisplayService(service, reportType).ToString());
                 }
 
-                if(rule.ServiceNegated)
+                if (rule.ServiceNegated)
                 {
                     result.Append($"{userConfig.GetText("negated")}(");
                 }
                 result.Append(string.Join(",", displayedServices));
-                if(rule.ServiceNegated)
+                if (rule.ServiceNegated)
                 {
                     result.Append(")");
                 }
@@ -134,7 +135,7 @@ namespace FWO.Ui.Display
             return output;
         }
 
-        private string DisplaySourceOrDestination(Rule rule, ReportType reportType , bool isSource)
+        private string DisplaySourceOrDestination(Rule rule, ReportType reportType, bool isSource)
         {
             StringBuilder result = new StringBuilder("");
 

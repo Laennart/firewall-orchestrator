@@ -1,9 +1,9 @@
-﻿using FWO.Logging;
-using FWO.Config.File;
-using FWO.Basics;
 using FWO.Api.Client;
-using FWO.Config.Api.Data;
 using FWO.Api.Client.Queries;
+using FWO.Basics;
+using FWO.Config.Api.Data;
+using FWO.Config.File;
+using FWO.Logging;
 
 namespace FWO.Config.Api
 {
@@ -29,7 +29,7 @@ namespace FWO.Config.Api
             ApiConnection apiConnection = new GraphQlApiConnection(ConfigFile.ApiServerUri, jwt);
             return await ConstructAsync(apiConnection, loadLanguageData, withSubscription);
         }
-        
+
         public static async Task<GlobalConfig> ConstructAsync(ApiConnection apiConnection, bool loadLanguageData = true, bool withSubscription = false)
         {
             string productVersion = ConfigFile.ProductVersion;
@@ -90,15 +90,15 @@ namespace FWO.Config.Api
             OverDict = overDict;
         }
 
-        public override string GetText(string key) 
+        public override string GetText(string key)
         {
-            if(LangDict.TryGetValue(DefaultLanguage, out Dictionary<string, string>? langDict) && langDict.TryGetValue(key, out string? value))
+            if (LangDict.TryGetValue(DefaultLanguage, out Dictionary<string, string>? langDict) && langDict.TryGetValue(key, out string? value))
             {
                 return System.Web.HttpUtility.HtmlDecode(value);
             }
             return GlobalConst.kUndefinedText;
         }
-        
+
         private static async Task<Dictionary<string, string>> LoadLangDict(Language lang, ApiConnection apiConnection, bool over = false)
         {
             var languageVariable = new { language = lang.Name };

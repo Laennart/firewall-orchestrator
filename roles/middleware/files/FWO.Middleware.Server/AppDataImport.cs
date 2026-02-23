@@ -1,3 +1,6 @@
+using System.Data;
+using System.Text.Json;
+
 using FWO.Api.Client;
 using FWO.Api.Client.Queries;
 using FWO.Basics;
@@ -8,9 +11,8 @@ using FWO.Data.Modelling;
 using FWO.Logging;
 using FWO.Recert;
 using FWO.Services;
+
 using Novell.Directory.Ldap;
-using System.Data;
-using System.Text.Json;
 
 namespace FWO.Middleware.Server
 {
@@ -184,7 +186,7 @@ namespace FWO.Middleware.Server
                 }
                 // in order to store email addresses of users in the group in UiUser for email notification:
                 await AddAllGroupMembersToUiUser(userGroupDn);
-                if(userConfig.RecertificationMode == RecertificationMode.OwnersAndRules && 
+                if (userConfig.RecertificationMode == RecertificationMode.OwnersAndRules &&
                     incomingApp.RecertActive && (existingApp == null || !existingApp.RecertActive))
                 {
                     RecertHandler recertHandler = new(apiConnection, userConfig);

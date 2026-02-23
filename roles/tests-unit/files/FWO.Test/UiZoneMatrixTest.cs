@@ -1,12 +1,16 @@
+using AngleSharp.Dom;
+
 using Bunit;
 using Bunit.TestDoubles;
-using FWO.Ui.Pages.Compliance;
-using NUnit.Framework;
-using Microsoft.Extensions.DependencyInjection;
+
 using FWO.Config.Api;
-using FWO.Services;
 using FWO.Data;
-using AngleSharp.Dom;
+using FWO.Services;
+using FWO.Ui.Pages.Compliance;
+
+using Microsoft.Extensions.DependencyInjection;
+
+using NUnit.Framework;
 
 namespace FWO.Test
 {
@@ -15,8 +19,8 @@ namespace FWO.Test
     {
         private UserConfig _userConfig = new();
         private NetworkZoneService _networkZoneService = new();
-	    private List<(ComplianceNetworkZone, ComplianceNetworkZone)> _addCommunication = [];
-	    private List<(ComplianceNetworkZone, ComplianceNetworkZone)> _deleteCommunication = [];
+        private List<(ComplianceNetworkZone, ComplianceNetworkZone)> _addCommunication = [];
+        private List<(ComplianceNetworkZone, ComplianceNetworkZone)> _deleteCommunication = [];
 
         Task<IRenderedComponent<ZonesMatrix>> RenderZoneMatrix(bool editMode = true, bool sortById = true)
         {
@@ -223,9 +227,9 @@ namespace FWO.Test
         }
 
 
-        
 
-//$"matrix-element-{sourceZone.IdString.Replace(" ", "")}-to-{destinationZone.IdString.Replace(" ", "")}"
+
+        //$"matrix-element-{sourceZone.IdString.Replace(" ", "")}-to-{destinationZone.IdString.Replace(" ", "")}"
     }
 
 }

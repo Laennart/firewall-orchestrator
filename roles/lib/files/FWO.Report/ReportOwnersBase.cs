@@ -1,15 +1,16 @@
-using FWO.Report.Filter;
-using FWO.Config.Api;
-using FWO.Basics;
-using System.Text.Json;
 using System.Text;
+using System.Text.Json;
+
+using FWO.Basics;
+using FWO.Config.Api;
+using FWO.Report.Filter;
 
 namespace FWO.Report
 {
     public abstract class ReportOwnersBase : ReportBase
     {
         protected ReportOwnersBase(DynGraphqlQuery query, UserConfig userConfig, ReportType reportType) : base(query, userConfig, reportType)
-        {}
+        { }
 
         public override string ExportToJson()
         {

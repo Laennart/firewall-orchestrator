@@ -1,4 +1,4 @@
-﻿using FWO.Logging;
+using FWO.Logging;
 
 namespace FWO.Api.Client.Queries
 {
@@ -30,7 +30,7 @@ namespace FWO.Api.Client.Queries
         public static readonly string getCriteria;
         public static readonly string getMatrices;
         public static readonly string getMatrixByName;
-        
+
         public static readonly string addCritToPolicy;
         public static readonly string removeCritFromPolicy;
         public static readonly string getPolicyIdsForCrit;

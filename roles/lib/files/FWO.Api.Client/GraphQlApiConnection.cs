@@ -1,11 +1,14 @@
 using System.Text.Json;
-using GraphQL;
-using GraphQL.Client.Http;
-using GraphQL.Client.Serializer.SystemTextJson;
-using GraphQL.Client.Serializer.Newtonsoft;
-using GraphQL.Client.Abstractions;
-using Newtonsoft.Json.Linq;
+
 using FWO.Logging;
+
+using GraphQL;
+using GraphQL.Client.Abstractions;
+using GraphQL.Client.Http;
+using GraphQL.Client.Serializer.Newtonsoft;
+using GraphQL.Client.Serializer.SystemTextJson;
+
+using Newtonsoft.Json.Linq;
 
 namespace FWO.Api.Client
 {

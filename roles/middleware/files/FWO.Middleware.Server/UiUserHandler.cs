@@ -1,13 +1,15 @@
-﻿using FWO.Api.Client;
-using FWO.Api.Client.Queries;
-using FWO.Logging;
-using FWO.Config.File;
-using FWO.Basics;
-using FWO.Data;
 using System.Text.Json.Serialization;
-using Newtonsoft.Json;
-using FWO.Config.Api.Data;
 using System.Text.RegularExpressions;
+
+using FWO.Api.Client;
+using FWO.Api.Client.Queries;
+using FWO.Basics;
+using FWO.Config.Api.Data;
+using FWO.Config.File;
+using FWO.Data;
+using FWO.Logging;
+
+using Newtonsoft.Json;
 
 namespace FWO.Middleware.Server
 {
@@ -160,7 +162,7 @@ namespace FWO.Middleware.Server
             }
             string regexPattern = ReplacePlaceholdersWithPattern(namingConvention);
             string cn = userIn;
-            
+
             if (userIn.Contains(','))
             {
                 // the userIn is a DN, so extract the CN part

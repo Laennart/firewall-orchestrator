@@ -1,17 +1,20 @@
+using System.Text;
+using System.Text.Json;
+
 using FWO.Api.Client;
 using FWO.Api.Client.Queries;
 using FWO.Basics;
 using FWO.Config.Api;
 using FWO.Data;
 using FWO.Data.Report;
-using FWO.Services.RuleTreeBuilder;
 using FWO.Logging;
 using FWO.Report.Filter;
+using FWO.Services.RuleTreeBuilder;
 using FWO.Ui.Display;
-using Newtonsoft.Json;
-using System.Text;
-using System.Text.Json;
+
 using Microsoft.Extensions.DependencyInjection;
+
+using Newtonsoft.Json;
 
 namespace FWO.Report
 {
@@ -428,7 +431,7 @@ namespace FWO.Report
                 getItems: (dev, mgmt) => _rulesCache[(dev.Id, mgmt.Id)],
                 renderItem: rule => ruleDisplayJson.DisplayRuleJsonObject(rule, ReportType),
                 itemsPropertyName: "rules"
-            );            
+            );
         }
 
         public override string ExportToHtml()

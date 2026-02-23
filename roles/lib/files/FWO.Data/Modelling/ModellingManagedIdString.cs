@@ -2,7 +2,6 @@ namespace FWO.Data.Modelling
 {
     public class ModellingManagedIdString
     {
-        private string IdString = "";
         private const string separator = "-";
 
         public ModellingNamingConvention NamingConvention { get; set; } = new();
@@ -13,45 +12,35 @@ namespace FWO.Data.Modelling
 
         public ModellingManagedIdString(string idstring)
         {
-            IdString = idstring;
+            Whole = idstring;
             NamingConvention = new();
         }
 
         public ModellingManagedIdString(ModellingManagedIdString managedIdstring)
         {
-            IdString = managedIdstring.IdString;
+            Whole = managedIdstring.Whole;
             NamingConvention = managedIdstring.NamingConvention;
         }
 
-        public string Whole
-        {
-            get
-            {
-                return IdString;
-            }
-            set
-            {
-                IdString = value;
-            }
-        }
+        public string Whole { get; set; } = "";
 
         public string FixedPart
         {
             get
             {
-                return IdString.Length >= NamingConvention.FixedPartLength ? IdString.Substring(0, NamingConvention.FixedPartLength) : IdString;
+                return Whole.Length >= NamingConvention.FixedPartLength ? Whole.Substring(0, NamingConvention.FixedPartLength) : Whole;
             }
             set
             {
                 string valueToInsert = value.Length > NamingConvention.FixedPartLength ? value.Substring(0, NamingConvention.FixedPartLength) : value;
                 valueToInsert = FillFixedIfNecessary(valueToInsert, "?");
-                if (IdString.Length >= NamingConvention.FixedPartLength)
+                if (Whole.Length >= NamingConvention.FixedPartLength)
                 {
-                    IdString = valueToInsert + IdString.Substring(NamingConvention.FixedPartLength);
+                    Whole = valueToInsert + Whole.Substring(NamingConvention.FixedPartLength);
                 }
                 else
                 {
-                    IdString = valueToInsert;
+                    Whole = valueToInsert;
                 }
             }
         }
@@ -60,14 +49,14 @@ namespace FWO.Data.Modelling
         {
             get
             {
-                return NamingConvention.UseAppPart ? ( AppPartExisting() ? IdString.Substring(NamingConvention.FixedPartLength, AppPartEnd() - NamingConvention.FixedPartLength + 1) : "" ) : "";
+                return NamingConvention.UseAppPart ? (AppPartExisting() ? Whole.Substring(NamingConvention.FixedPartLength, AppPartEnd() - NamingConvention.FixedPartLength + 1) : "") : "";
             }
             set
             {
                 if (NamingConvention.UseAppPart)
                 {
-                    IdString = FillFixedIfNecessary(IdString);
-                    IdString = IdString.Substring(0, NamingConvention.FixedPartLength) + value + FreePart;
+                    Whole = FillFixedIfNecessary(Whole);
+                    Whole = Whole.Substring(0, NamingConvention.FixedPartLength) + value + FreePart;
                 }
             }
         }
@@ -76,11 +65,11 @@ namespace FWO.Data.Modelling
         {
             get
             {
-                return FixedPart + ( AppPart.EndsWith(separator) ? AppPart.Substring(0, AppPart.Length - 1) : AppPart );
+                return FixedPart + (AppPart.EndsWith(separator) ? AppPart.Substring(0, AppPart.Length - 1) : AppPart);
             }
             set
             {
-                IdString = value + FreePart;
+                Whole = value + FreePart;
             }
         }
 
@@ -107,9 +96,9 @@ namespace FWO.Data.Modelling
                 {
                     int appPartEnd = AppPartEnd();
                     int startIndex = appPartEnd + 1;
-                    if (startIndex >= 0 && startIndex < IdString.Length)
+                    if (startIndex >= 0 && startIndex < Whole.Length)
                     {
-                        return IdString.Substring(startIndex);
+                        return Whole.Substring(startIndex);
                     }
                     else
                     {
@@ -119,9 +108,9 @@ namespace FWO.Data.Modelling
                 else
                 {
                     int startIndex = NamingConvention.FixedPartLength;
-                    if (startIndex >= 0 && startIndex < IdString.Length)
+                    if (startIndex >= 0 && startIndex < Whole.Length)
                     {
-                        return IdString.Substring(startIndex);
+                        return Whole.Substring(startIndex);
                     }
                     else
                     {
@@ -131,22 +120,22 @@ namespace FWO.Data.Modelling
             }
             set
             {
-                IdString = FillFixedIfNecessary(IdString);
+                Whole = FillFixedIfNecessary(Whole);
                 int insertIndex = AppPartExisting() ? AppPartEnd() + 1 : NamingConvention.FixedPartLength;
-                if (insertIndex >= 0 && insertIndex <= IdString.Length)
+                if (insertIndex >= 0 && insertIndex <= Whole.Length)
                 {
-                    IdString = IdString.Substring(0, insertIndex) + value;
+                    Whole = Whole.Substring(0, insertIndex) + value;
                 }
                 else
                 {
-                    IdString += value;
+                    Whole += value;
                 }
             }
         }
 
         public void SetAppPartFromExtId(string extAppId)
         {
-            string zoneType = extAppId.StartsWith("APP") ? "0" : ( extAppId.StartsWith("COM") ? "1" : "?" );
+            string zoneType = extAppId.StartsWith("APP") ? "0" : (extAppId.StartsWith("COM") ? "1" : "?");
             int idx = extAppId.IndexOf(separator);
             string appNumber = idx > 0 ? extAppId.Substring(idx + 1, extAppId.Length - idx - 1) : "";
             AppPart = zoneType + appNumber + separator;
@@ -154,11 +143,11 @@ namespace FWO.Data.Modelling
 
         public void SetAppPartFromExtIdAZ(string extAppId)
         {
-            string zoneType = extAppId.StartsWith("APP") ? "0" : ( extAppId.StartsWith("COM") ? "1" : "?" );
+            string zoneType = extAppId.StartsWith("APP") ? "0" : (extAppId.StartsWith("COM") ? "1" : "?");
             int idx = extAppId.IndexOf("-");
             string appNumber = idx > 0 ? extAppId.Substring(idx + 1, extAppId.Length - idx - 1) : "";
             AppPart = zoneType + appNumber;
-            IdString = $"{NamingConvention.AppZone}{zoneType}{appNumber}";
+            Whole = $"{NamingConvention.AppZone}{zoneType}{appNumber}";
         }
 
         public void ConvertAreaToAppRoleFixedPart(string areaIdString)
@@ -188,12 +177,12 @@ namespace FWO.Data.Modelling
 
         private int AppPartEnd()
         {
-            return IdString.IndexOf(separator);
+            return Whole.IndexOf(separator);
         }
 
         private bool AppPartExisting()
         {
-            return AppPartEnd() > NamingConvention.FixedPartLength && IdString.Length >= AppPartEnd();
+            return AppPartEnd() > NamingConvention.FixedPartLength && Whole.Length >= AppPartEnd();
         }
 
         private string FillFixedIfNecessary(string idString, string filler = " ")

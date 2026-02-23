@@ -1,14 +1,16 @@
-﻿using FWO.Api.Client;
+using System.Text.Json;
+
+using FWO.Api.Client;
 using FWO.Basics;
-using FWO.Config.Api;
 using FWO.Compliance;
+using FWO.Config.Api;
 using FWO.Data;
 using FWO.Data.Middleware;
 using FWO.Logging;
+using FWO.Report;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-using FWO.Report;
 
 namespace FWO.Middleware.Server.Controllers
 {
@@ -54,14 +56,14 @@ namespace FWO.Middleware.Server.Controllers
             try
             {
                 GlobalConfig globalConfig = await GlobalConfig.ConstructAsync(apiConnection, true);
-                UserConfig userConfig = new(globalConfig, apiConnection, new(){ Language = GlobalConst.kEnglish });
+                UserConfig userConfig = new(globalConfig, apiConnection, new() { Language = GlobalConst.kEnglish });
 
                 ComplianceCheck complianceCheck = new(userConfig, apiConnection);
                 await complianceCheck.CheckAll();
 
                 ReportCompliance reportCompliance = new(new(""), userConfig, ReportType.ComplianceReport);
                 await reportCompliance.GetManagementAndDevices(apiConnection);
-                List<Management> relevantManagements =  ComplianceCheck.GetRelevantManagements(globalConfig, reportCompliance.Managements!);
+                List<Management> relevantManagements = ComplianceCheck.GetRelevantManagements(globalConfig, reportCompliance.Managements!);
                 reportCompliance.Managements = relevantManagements;
                 reportCompliance.GetViewDataFromRules(complianceCheck.RulesInCheck!);
                 string reportString = reportCompliance.ExportToCsv();

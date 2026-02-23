@@ -1,6 +1,8 @@
 using System.Text.Json.Serialization;
-using Newtonsoft.Json;
+
 using FWO.Data;
+
+using Newtonsoft.Json;
 
 namespace FWO.Data
 {
@@ -62,7 +64,7 @@ namespace FWO.Data
         [JsonProperty("rulebase"), JsonPropertyName("rulebase")]
         public RulebaseLastHit Rulebase { get; set; } = new RulebaseLastHit();
     }
-    
+
     public class RulebaseLastHit
     {
         [JsonProperty("rulesWithHits"), JsonPropertyName("rulesWithHits")]

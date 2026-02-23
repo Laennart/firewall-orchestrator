@@ -1,4 +1,5 @@
 using System.Net;
+
 using FWO.Api.Client.Queries;
 using FWO.Basics;
 using FWO.Compliance;
@@ -6,7 +7,9 @@ using FWO.Config.Api;
 using FWO.Data;
 using FWO.Logging;
 using FWO.Test.Mocks;
+
 using NetTools;
+
 using NSubstitute;
 
 namespace FWO.Test.Fixtures
@@ -41,7 +44,7 @@ namespace FWO.Test.Fixtures
             SimulatedUserConfig.DummyTranslate["H5839"] = "Matrix violation";
             SimulatedUserConfig.DummyTranslate["H5840"] = "Restricted Service";
             SimulatedUserConfig.DummyTranslate["H5841"] = "Assessability issue";
-            
+
             ComplianceCheck = new ComplianceCheck(UserConfig, ApiConnection, Logger.AsSub());
             ComplianceCheck.NetworkZones = CreateNetworkZones(true, true);
         }
@@ -87,7 +90,7 @@ namespace FWO.Test.Fixtures
                     ComplianceCriterion? matrix = ComplianceCheck.Policy!.Criteria
                         .FirstOrDefault(c => c.Content.CriterionType == nameof(CriterionType.Matrix))?.Content;
 
-                    ComplianceCheck.NetworkZones = CreateNetworkZones(true, true);                
+                    ComplianceCheck.NetworkZones = CreateNetworkZones(true, true);
                 }
 
                 ComplianceCheck.RulesInCheck = CreateRulesForComplianceCheckTest(setupNoViolations, ForbiddenServiceUid);
@@ -299,7 +302,7 @@ namespace FWO.Test.Fixtures
                             )
                         ]
                     }
-                ); 
+                );
             }
 
             if (createUndefinedInternalZone)
@@ -320,7 +323,7 @@ namespace FWO.Test.Fixtures
                             )
                         ]
                     }
-                ); 
+                );
             }
 
             foreach (ComplianceNetworkZone zone in networkZones.Where(zone => !zone.IsAutoCalculatedUndefinedInternalZone).ToList())

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FWO.Test
 {
-    internal class TestHelper
+    internal static class TestHelper
     {
         public static ReturnType InvokeMethod<ClassType, ReturnType>(string name, object?[]? parameters = null, ClassType? instance = null)
             where ClassType : class
@@ -17,7 +17,7 @@ namespace FWO.Test
                 ?? throw new Exception($"Method \"{name}\" could not be found in \"{typeof(ClassType)}\".");
             object? rawResult = method.Invoke(instance, parameters);
 
-            if (rawResult == null) 
+            if (rawResult == null)
             {
                 if (default(ReturnType) != null) // Not nullable
                 {

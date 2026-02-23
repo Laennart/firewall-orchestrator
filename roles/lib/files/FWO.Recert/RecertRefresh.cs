@@ -1,7 +1,8 @@
-﻿using System.Diagnostics;
-using FWO.Data;
+using System.Diagnostics;
+
 using FWO.Api.Client;
 using FWO.Api.Client.Queries;
+using FWO.Data;
 using FWO.Logging;
 
 namespace FWO.Recert

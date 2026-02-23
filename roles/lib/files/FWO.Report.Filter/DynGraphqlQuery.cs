@@ -1,10 +1,11 @@
-using FWO.Report.Filter.Ast;
+using System.Text.RegularExpressions;
+
 using FWO.Api.Client.Queries;
+using FWO.Basics;
 using FWO.Data;
 using FWO.Data.Report;
-using System.Text.RegularExpressions;
 using FWO.Logging;
-using FWO.Basics;
+using FWO.Report.Filter.Ast;
 
 
 namespace FWO.Report.Filter
@@ -436,7 +437,7 @@ namespace FWO.Report.Filter
 
             foreach (ManagementSelect mgmt in deviceFilter.Managements)
             {
-                if (mgmt.Devices == null) continue; 
+                if (mgmt.Devices == null) continue;
 
                 foreach (DeviceSelect dev in mgmt.Devices)
                 {

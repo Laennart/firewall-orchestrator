@@ -1,3 +1,5 @@
+using System.Timers;
+
 using FWO.Api.Client;
 using FWO.Api.Client.Queries;
 using FWO.Basics;
@@ -7,7 +9,6 @@ using FWO.Data;
 using FWO.Data.Middleware;
 using FWO.Logging;
 using FWO.Recert;
-using System.Timers;
 
 namespace FWO.Middleware.Server
 {
@@ -30,11 +31,11 @@ namespace FWO.Middleware.Server
         private DailyCheckScheduler(ApiConnection apiConnection, GlobalConfig globalConfig)
             : base(apiConnection, globalConfig, ConfigQueries.subscribeDailyCheckConfigChanges, SchedulerInterval.Days, "DailyCheck")
         {
-            if(globalConfig.RecRefreshStartup)
+            if (globalConfig.RecRefreshStartup)
             {
-                #pragma warning disable CS4014
+#pragma warning disable CS4014
                 RefreshRecert(); // no need to wait
-                #pragma warning restore CS4014
+#pragma warning restore CS4014
             }
         }
 
@@ -57,13 +58,13 @@ namespace FWO.Middleware.Server
             {
                 await CheckDemoData();
                 await CheckImports();
-                if(globalConfig.RecRefreshDaily)
+                if (globalConfig.RecRefreshDaily)
                 {
                     await RefreshRecert();
                 }
                 await CheckRecerts();
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 await LogErrorsWithAlert(2, LogMessageTitle, GlobalConst.kDailyCheck, AlertCode.DailyCheckError, exc);
             }
@@ -77,9 +78,9 @@ namespace FWO.Middleware.Server
 
         private async Task CheckRecerts()
         {
-            if(globalConfig.RecCheckActive)
+            if (globalConfig.RecCheckActive)
             {
-                RecertCheck recertCheck = new (apiConnection, globalConfig);
+                RecertCheck recertCheck = new(apiConnection, globalConfig);
                 int emailsSent = await recertCheck.CheckRecertifications();
                 Log.WriteDebug(LogMessageTitle, $"Recert Check: Sent {emailsSent} emails.");
                 await AddLogEntry(0, globalConfig.GetText("daily_recert_check"), emailsSent + globalConfig.GetText("emails_sent"), GlobalConst.kDailyCheck);

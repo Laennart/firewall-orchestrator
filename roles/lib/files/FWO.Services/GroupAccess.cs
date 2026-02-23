@@ -1,13 +1,15 @@
-﻿using FWO.Config.Api;
+using System.Net;
+
+using FWO.Config.Api;
 using FWO.Data;
 using FWO.Data.Middleware;
 using FWO.Middleware.Client;
+
 using RestSharp;
-using System.Net;
 
 namespace FWO.Services
 {
-    public class GroupAccess
+    public static class GroupAccess
     {
         static public async Task<List<UserGroup>> GetGroupsFromInternalLdap(MiddlewareClient middlewareClient, UserConfig userConfig,
             Action<Exception?, string, string, bool> DisplayMessageInUi, bool ownerGroupsOnly = false)
@@ -22,17 +24,17 @@ namespace FWO.Services
             {
                 foreach (var ldapUserGroup in middlewareServerGroupsResponse.Data)
                 {
-                    if(!ownerGroupsOnly || ldapUserGroup.OwnerGroup)
+                    if (!ownerGroupsOnly || ldapUserGroup.OwnerGroup)
                     {
-                        UserGroup group = new ()
-                        { 
+                        UserGroup group = new()
+                        {
                             Dn = ldapUserGroup.GroupDn,
                             Name = new DistName(ldapUserGroup.GroupDn).Group,
                             OwnerGroup = ldapUserGroup.OwnerGroup
                         };
                         foreach (var userDn in ldapUserGroup.Members)
                         {
-                            UiUser newUser = new () { Dn = userDn, Name = new DistName(userDn).UserName };
+                            UiUser newUser = new() { Dn = userDn, Name = new DistName(userDn).UserName };
                             group.Users.Add(newUser);
                         }
                         groups.Add(group);

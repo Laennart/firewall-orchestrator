@@ -1,8 +1,9 @@
-using Microsoft.AspNetCore.Components.Server.Circuits;
-using FWO.Logging;
 using FWO.Data;
-using FWO.Services.EventMediator.Interfaces;
+using FWO.Logging;
 using FWO.Services.EventMediator.Events;
+using FWO.Services.EventMediator.Interfaces;
+
+using Microsoft.AspNetCore.Components.Server.Circuits;
 
 namespace FWO.Ui.Services
 {

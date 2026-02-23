@@ -1,13 +1,15 @@
-﻿using NUnit.Framework;
-using NUnit.Framework.Legacy;
+using System.Timers;
+
 using FWO.Api.Client;
 using FWO.Api.Client.Queries;
-using FWO.Data;
 using FWO.Config.Api;
 using FWO.Config.Api.Data;
+using FWO.Data;
 using FWO.Middleware.Server;
-using System.Timers;
 using FWO.Services;
+
+using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 
 namespace FWO.Test
@@ -26,13 +28,13 @@ namespace FWO.Test
                 SimulatedGlobalConfig globalConfig = new();
                 return new TestScheduler(apiConnection, globalConfig);
             }
-        
+
             private TestScheduler(ApiConnection apiConnection, GlobalConfig globalConfig)
                 : base(apiConnection, globalConfig, ConfigQueries.subscribeExternalRequestConfigChanges, SchedulerInterval.Seconds, "Test")
             {
                 StartScheduleTimer(1, DateTime.Now);
             }
-            
+
             private readonly int Counter = 1;
 
             /// <summary>
@@ -56,7 +58,7 @@ namespace FWO.Test
 
         [SetUp]
         public void Initialize()
-        {}
+        { }
 
         [Test]
         public async Task TestTestScheduler()

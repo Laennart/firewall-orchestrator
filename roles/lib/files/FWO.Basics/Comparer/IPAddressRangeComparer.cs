@@ -1,4 +1,5 @@
 using System.Numerics;
+
 using NetTools;
 
 namespace FWO.Basics.Comparer
@@ -7,12 +8,12 @@ namespace FWO.Basics.Comparer
     {
         public int Compare(IPAddressRange? x, IPAddressRange? y)
         {
-            if(x is null || y is null)
+            if (x is null || y is null)
             {
                 return 0;
             }
 
-            IPAdressComparer iPAdressComparer = new ();
+            IPAdressComparer iPAdressComparer = new();
             int compareIPAddressResult = iPAdressComparer.Compare(x.Begin, y.Begin);
 
             if (compareIPAddressResult != 0)
@@ -23,12 +24,12 @@ namespace FWO.Basics.Comparer
             BigInteger xRangeSize = GetIPRangeSize(x);
             BigInteger yRangeSize = GetIPRangeSize(y);
 
-            if(xRangeSize < yRangeSize)
+            if (xRangeSize < yRangeSize)
             {
                 return -1;
             }
 
-            if(xRangeSize > yRangeSize)
+            if (xRangeSize > yRangeSize)
             {
                 return 1;
             }

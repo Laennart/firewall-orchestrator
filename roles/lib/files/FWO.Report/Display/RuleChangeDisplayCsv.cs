@@ -1,6 +1,6 @@
 using FWO.Basics;
-using FWO.Data;
 using FWO.Config.Api;
+using FWO.Data;
 using FWO.Report.Filter;
 
 namespace FWO.Ui.Display
@@ -174,7 +174,7 @@ namespace FWO.Ui.Display
 
                 oldElement = oldElement.Replace("\"", "");
                 newElement = newElement.Replace("\"", "");
-                if(oldNegated != newNegated)
+                if (oldNegated != newNegated)
                 {
                     deleted.Add(oldElement);
                     added.Add(newElement);
@@ -184,7 +184,7 @@ namespace FWO.Ui.Display
                     AnalyzeElements(oldElement, newElement, ref unchanged, ref deleted, ref added);
                 }
 
-                return string.Join(" ", unchanged) 
+                return string.Join(" ", unchanged)
                     + (deleted.Count > 0 ? $" {userConfig.GetText("deleted")}: {string.Join(",", deleted)}" : "")
                     + (added.Count > 0 ? $" {userConfig.GetText("added")}: {string.Join(",", added)}" : "");
             }

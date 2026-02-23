@@ -1,12 +1,14 @@
+using System.Reflection;
+
 using FWO.Api.Client;
 using FWO.Api.Client.Queries;
 using FWO.Config.File;
 using FWO.Logging;
 using FWO.Middleware.Server;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Reflection;
 
 // Implicitly call static constructor so background lock process is started
 // (static constructor is only called after class is used in any way)
@@ -59,53 +61,53 @@ Log.WriteInfo("Found ldap connection to server", string.Join("\n", connectedLdap
 // Create and start report scheduler
 await Task.Factory.StartNew(async () =>
 {
-    reportScheduler = await  ReportScheduler.CreateAsync(apiConnection, jwtWriter, connectedLdapsSubscription);
+    reportScheduler = await ReportScheduler.CreateAsync(apiConnection, jwtWriter, connectedLdapsSubscription);
 }, TaskCreationOptions.LongRunning);
 
 // Create and start auto disovery scheduler
-await Task.Factory.StartNew(async() =>
+await Task.Factory.StartNew(async () =>
 {
     autoDiscoverScheduler = await AutoDiscoverScheduler.CreateAsync(apiConnection);
 }, TaskCreationOptions.LongRunning);
 
 // Create and start daily check scheduler
-await Task.Factory.StartNew(async() =>
+await Task.Factory.StartNew(async () =>
 {
     dailyCheckScheduler = await DailyCheckScheduler.CreateAsync(apiConnection);
 }, TaskCreationOptions.LongRunning);
 
 // Create and start import app data scheduler
-await Task.Factory.StartNew(async() =>
+await Task.Factory.StartNew(async () =>
 {
     importAppDataScheduler = await ImportAppDataScheduler.CreateAsync(apiConnection);
 }, TaskCreationOptions.LongRunning);
 
 // Create and start import subnet data scheduler
-await Task.Factory.StartNew(async() =>
+await Task.Factory.StartNew(async () =>
 {
     importSubnetDataScheduler = await ImportIpDataScheduler.CreateAsync(apiConnection);
 }, TaskCreationOptions.LongRunning);
 
 // Create and start import change notify scheduler
-await Task.Factory.StartNew(async() =>
+await Task.Factory.StartNew(async () =>
 {
     importChangeNotifyScheduler = await ImportChangeNotifyScheduler.CreateAsync(apiConnection);
 }, TaskCreationOptions.LongRunning);
 
 // Create and start external request scheduler
-await Task.Factory.StartNew(async() =>
+await Task.Factory.StartNew(async () =>
 {
     externalRequestScheduler = await ExternalRequestScheduler.CreateAsync(apiConnection);
 }, TaskCreationOptions.LongRunning);
 
 // Create and start variance analysis scheduler
-await Task.Factory.StartNew(async() =>
+await Task.Factory.StartNew(async () =>
 {
     varianceAnalysisScheduler = await VarianceAnalysisScheduler.CreateAsync(apiConnection);
 }, TaskCreationOptions.LongRunning);
 
 // Create and start compliance check scheduler
-await Task.Factory.StartNew(async() =>
+await Task.Factory.StartNew(async () =>
 {
     complianceCheckScheduler = await ComplianceCheckScheduler.CreateAsync(apiConnection);
 }, TaskCreationOptions.LongRunning);
@@ -114,8 +116,8 @@ await Task.Factory.StartNew(async() =>
 builder.Services.AddControllers()
   .AddJsonOptions(jsonOptions =>
   {
-        //jsonOptions.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-        jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;
+      //jsonOptions.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+      jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;
   });
 
 builder.Services.AddSingleton<JwtWriter>(jwtWriter);

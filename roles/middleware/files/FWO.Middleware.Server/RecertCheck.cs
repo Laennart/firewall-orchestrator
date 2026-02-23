@@ -1,3 +1,5 @@
+using System.Text;
+
 using FWO.Api.Client;
 using FWO.Api.Client.Queries;
 using FWO.Basics;
@@ -12,7 +14,6 @@ using FWO.Logging;
 using FWO.Mail;
 using FWO.Report;
 using FWO.Services;
-using System.Text;
 
 namespace FWO.Middleware.Server
 {

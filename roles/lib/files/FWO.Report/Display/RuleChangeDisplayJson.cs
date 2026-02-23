@@ -1,6 +1,6 @@
 using FWO.Basics;
-using FWO.Data;
 using FWO.Config.Api;
+using FWO.Data;
 using FWO.Report.Filter;
 
 namespace FWO.Ui.Display
@@ -54,7 +54,8 @@ namespace FWO.Ui.Display
             {
                 case 'D': return DisplaySourceNegated(ruleChange.OldRule.SourceNegated);
                 case 'I': return DisplaySourceNegated(ruleChange.NewRule.SourceNegated);
-                case 'C': return ruleChange.OldRule.SourceNegated == ruleChange.NewRule.SourceNegated ?
+                case 'C':
+                    return ruleChange.OldRule.SourceNegated == ruleChange.NewRule.SourceNegated ?
                     DisplaySourceNegated(ruleChange.NewRule.SourceNegated) :
                     DisplayJsonString("source negated", DisplayDiff(ruleChange.OldRule.SourceNegated.ToString().ToLower(), ruleChange.NewRule.SourceNegated.ToString().ToLower()));
                 default: return "";
@@ -67,7 +68,8 @@ namespace FWO.Ui.Display
             {
                 case 'D': return DisplaySource(ruleChange.OldRule, reportType);
                 case 'I': return DisplaySource(ruleChange.NewRule, reportType);
-                case 'C': return DisplayJsonArray("source", DisplayArrayDiff(ListNetworkLocations(ruleChange.OldRule, reportType, true), 
+                case 'C':
+                    return DisplayJsonArray("source", DisplayArrayDiff(ListNetworkLocations(ruleChange.OldRule, reportType, true),
                     ListNetworkLocations(ruleChange.NewRule, reportType, true)));
                 default: return "";
             }
@@ -90,7 +92,8 @@ namespace FWO.Ui.Display
             {
                 case 'D': return DisplayDestinationNegated(ruleChange.OldRule.DestinationNegated);
                 case 'I': return DisplayDestinationNegated(ruleChange.NewRule.DestinationNegated);
-                case 'C': return ruleChange.OldRule.DestinationNegated == ruleChange.NewRule.DestinationNegated ?
+                case 'C':
+                    return ruleChange.OldRule.DestinationNegated == ruleChange.NewRule.DestinationNegated ?
                     DisplayDestinationNegated(ruleChange.NewRule.DestinationNegated) :
                     DisplayJsonString("destination negated", DisplayDiff(ruleChange.OldRule.DestinationNegated.ToString().ToLower(), ruleChange.NewRule.DestinationNegated.ToString().ToLower()));
                 default: return "";
@@ -103,7 +106,8 @@ namespace FWO.Ui.Display
             {
                 case 'D': return DisplayDestination(ruleChange.OldRule, reportType);
                 case 'I': return DisplayDestination(ruleChange.NewRule, reportType);
-                case 'C': return DisplayJsonArray("destination", DisplayArrayDiff(ListNetworkLocations(ruleChange.OldRule, reportType, false),
+                case 'C':
+                    return DisplayJsonArray("destination", DisplayArrayDiff(ListNetworkLocations(ruleChange.OldRule, reportType, false),
                     ListNetworkLocations(ruleChange.NewRule, reportType, false)));
                 default: return "";
             }
@@ -115,7 +119,8 @@ namespace FWO.Ui.Display
             {
                 case 'D': return DisplayServiceNegated(ruleChange.OldRule.ServiceNegated);
                 case 'I': return DisplayServiceNegated(ruleChange.NewRule.ServiceNegated);
-                case 'C': return ruleChange.OldRule.ServiceNegated == ruleChange.NewRule.ServiceNegated ?
+                case 'C':
+                    return ruleChange.OldRule.ServiceNegated == ruleChange.NewRule.ServiceNegated ?
                     DisplayServiceNegated(ruleChange.NewRule.ServiceNegated) :
                     DisplayJsonString("service negated", DisplayDiff(ruleChange.OldRule.ServiceNegated.ToString().ToLower(), ruleChange.NewRule.ServiceNegated.ToString().ToLower()));
                 default: return "";
@@ -128,7 +133,8 @@ namespace FWO.Ui.Display
             {
                 case 'D': return DisplayServices(ruleChange.OldRule, reportType);
                 case 'I': return DisplayServices(ruleChange.NewRule, reportType);
-                case 'C': return DisplayJsonArray("service", DisplayArrayDiff(ListServices(ruleChange.OldRule, reportType), 
+                case 'C':
+                    return DisplayJsonArray("service", DisplayArrayDiff(ListServices(ruleChange.OldRule, reportType),
                     ListServices(ruleChange.NewRule, reportType)));
                 default: return "";
             }
@@ -162,7 +168,8 @@ namespace FWO.Ui.Display
             {
                 case 'D': return DisplayEnabled(ruleChange.OldRule.Disabled);
                 case 'I': return DisplayEnabled(ruleChange.NewRule.Disabled);
-                case 'C': return ruleChange.OldRule.Disabled == ruleChange.NewRule.Disabled ?
+                case 'C':
+                    return ruleChange.OldRule.Disabled == ruleChange.NewRule.Disabled ?
                     DisplayEnabled(ruleChange.NewRule.Disabled) :
                     DisplayJsonString("disabled", DisplayDiff(ruleChange.OldRule.Disabled.ToString().ToLower(), ruleChange.NewRule.Disabled.ToString().ToLower()));
                 default: return "";
@@ -200,7 +207,7 @@ namespace FWO.Ui.Display
             else
             {
                 return (oldElement != null && oldElement.Length > 0 ? $"{userConfig.GetText("deleted")}: {oldElement}{(newElement != null && newElement.Length > 0 ? ", " : "")}" : "")
-                    + (newElement != null && newElement.Length > 0 ?$"{userConfig.GetText("added")}: {newElement}" : "");
+                    + (newElement != null && newElement.Length > 0 ? $"{userConfig.GetText("added")}: {newElement}" : "");
             }
         }
 
@@ -220,7 +227,7 @@ namespace FWO.Ui.Display
                 newElement = newElement.Replace("\"", "");
                 AnalyzeElements(oldElement, newElement, ref unchanged, ref deleted, ref added);
 
-                return string.Join(",", Array.ConvertAll(unchanged.ToArray(), elem => Quote(elem))) + (unchanged.Count > 0 && (deleted.Count > 0 || added.Count > 0 ) ? "," : "")
+                return string.Join(",", Array.ConvertAll(unchanged.ToArray(), elem => Quote(elem))) + (unchanged.Count > 0 && (deleted.Count > 0 || added.Count > 0) ? "," : "")
                     + (deleted.Count > 0 ? string.Join(",", Array.ConvertAll(deleted.ToArray(), elem => Quote($"{userConfig.GetText("deleted")}: {elem}"))) : "") + (deleted.Count > 0 && added.Count > 0 ? "," : "")
                     + (added.Count > 0 ? string.Join(",", Array.ConvertAll(added.ToArray(), elem => Quote($"{userConfig.GetText("added")}: {elem}"))) : "");
             }

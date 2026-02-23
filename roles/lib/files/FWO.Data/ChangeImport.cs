@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json.Serialization; 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+
+using Newtonsoft.Json;
 
 namespace FWO.Data
 {
@@ -12,8 +13,8 @@ namespace FWO.Data
         [JsonProperty("time"), JsonPropertyName("time")]
         public DateTime Time { get; set; }
 
-        public ChangeImport() {}
-        
+        public ChangeImport() { }
+
         public ChangeImport(ChangeImport changeImport)
         {
             Time = changeImport.Time;

@@ -1,6 +1,8 @@
-using FWO.Basics;
-using Newtonsoft.Json;
 using System.Text.Json.Serialization;
+
+using FWO.Basics;
+
+using Newtonsoft.Json;
 
 namespace FWO.Data
 {
@@ -31,7 +33,7 @@ namespace FWO.Data
         public string? CloudClientSecret { get; set; }
 
         public ImportCredential()
-        {}
+        { }
 
         public ImportCredential(ImportCredential cred)
         {

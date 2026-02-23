@@ -1,6 +1,8 @@
-﻿using FWO.Logging;
+using FWO.Logging;
+
 using GraphQL;
 using GraphQL.Client.Http;
+
 using Newtonsoft.Json.Linq;
 
 namespace FWO.Api.Client

@@ -1,11 +1,13 @@
-﻿using FWO.Logging;
-using Microsoft.IdentityModel.Tokens;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+using FWO.Logging;
+
+using Microsoft.IdentityModel.Tokens;
+
 namespace FWO.Config.File
 {
-    public class ConfigFile
+    public static class ConfigFile
     {
         /// <summary>
         /// Path to config file
@@ -166,7 +168,7 @@ namespace FWO.Config.File
                 return configValue;
             }
         }
-        
+
         private static void IgnoreExceptions(Action method)
         {
             try { method(); } catch (Exception e) { Log.WriteDebug("Config value", $"Config value could not be loaded. Error: {e.Message}"); }

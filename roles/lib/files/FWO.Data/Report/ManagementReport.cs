@@ -1,5 +1,6 @@
-using Newtonsoft.Json;
 using System.Text.Json.Serialization;
+
+using Newtonsoft.Json;
 
 namespace FWO.Data.Report
 {
@@ -128,7 +129,7 @@ namespace FWO.Data.Report
             return Rulebases
                 .FirstOrDefault(rb => rb.Id == currentRbLink.NextRulebaseId);
         }
-        
+
     }
     public static class ManagementUtility
     {

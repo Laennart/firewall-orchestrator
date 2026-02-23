@@ -1,10 +1,12 @@
-using Newtonsoft.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
 using FWO.Basics;
 using FWO.Data;
 using FWO.Data.Workflow;
 using FWO.Mail;
+
+using Newtonsoft.Json;
 
 namespace FWO.Config.Api.Data
 {
@@ -300,7 +302,7 @@ namespace FWO.Config.Api.Data
 
         [JsonProperty("ownerLdapGroupNames"), JsonPropertyName("ownerLdapGroupNames")]
         public string OwnerLdapGroupNames { get; set; } = GlobalConst.kLdapGroupPattern;
-        
+
         [JsonProperty("importSubnetDataPath"), JsonPropertyName("importSubnetDataPath")]
         public string ImportSubnetDataPath { get; set; } = "";
 
@@ -444,13 +446,13 @@ namespace FWO.Config.Api.Data
 
         [JsonProperty("complianceCheckMaxPrintedViolations"), JsonPropertyName("complianceCheckMaxPrintedViolations")]
         public int ComplianceCheckMaxPrintedViolations { get; set; } = 0;
-        
+
         [JsonProperty("complianceCheckSortMatrixByID"), JsonPropertyName("complianceCheckSortMatrixByID")]
         public bool ComplianceCheckSortMatrixByID { get; set; } = false;
 
         [JsonProperty("complianceCheckRelevantManagements"), JsonPropertyName("complianceCheckRelevantManagements")]
         public string ComplianceCheckRelevantManagements { get; set; } = "";
-        
+
         [JsonProperty("reportSchedulerConfig"), JsonPropertyName("reportSchedulerConfig")]
         public string ReportSchedulerConfig { get; set; } = "";
 

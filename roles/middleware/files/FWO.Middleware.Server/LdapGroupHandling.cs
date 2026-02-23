@@ -1,9 +1,11 @@
+using System.Text.RegularExpressions;
+
 using FWO.Data;
 using FWO.Data.Middleware;
 using FWO.Encryption;
 using FWO.Logging;
+
 using Novell.Directory.Ldap;
-using System.Text.RegularExpressions;
 
 namespace FWO.Middleware.Server
 {

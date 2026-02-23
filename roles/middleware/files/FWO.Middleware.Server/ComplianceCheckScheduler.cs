@@ -1,11 +1,12 @@
-﻿using FWO.Api.Client;
+using System.Timers;
+
+using FWO.Api.Client;
 using FWO.Api.Client.Queries;
 using FWO.Basics;
 using FWO.Compliance;
 using FWO.Config.Api;
 using FWO.Config.Api.Data;
 using FWO.Data;
-using System.Timers;
 
 namespace FWO.Middleware.Server
 {
@@ -34,7 +35,7 @@ namespace FWO.Middleware.Server
         {
             ScheduleTimer.Stop();
             globalConfig.SubscriptionUpdateHandler([.. config]);
-            if(globalConfig.ComplianceCheckSleepTime > 0)
+            if (globalConfig.ComplianceCheckSleepTime > 0)
             {
                 StartScheduleTimer(globalConfig.ComplianceCheckSleepTime, globalConfig.ComplianceCheckStartAt);
             }

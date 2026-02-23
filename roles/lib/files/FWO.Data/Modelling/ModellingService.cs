@@ -1,6 +1,8 @@
-using System.Text.Json.Serialization; 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+
 using FWO.Basics;
+
+using Newtonsoft.Json;
 
 namespace FWO.Data.Modelling
 {
@@ -20,7 +22,7 @@ namespace FWO.Data.Modelling
 
 
         public ModellingService()
-        {}
+        { }
 
         public ModellingService(ModellingService service) : base(service)
         {

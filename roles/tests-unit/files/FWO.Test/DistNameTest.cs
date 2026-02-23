@@ -1,7 +1,8 @@
-﻿using NUnit.Framework;
-using NUnit.Framework.Legacy;
 using FWO.Basics;
 using FWO.Data;
+
+using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace FWO.Test
 {
@@ -16,7 +17,7 @@ namespace FWO.Test
 
         [SetUp]
         public void Initialize()
-        {}
+        { }
 
         [Test]
         public void TestDistName()

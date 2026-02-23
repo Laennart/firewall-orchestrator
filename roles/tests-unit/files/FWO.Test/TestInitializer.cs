@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.IO;
+
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
@@ -35,7 +36,7 @@ namespace FWO.Test
 
         public void SetGermanTimeZoneOnAllUnitTest()
         {
-            fakeLocalTimeZone = new FakeLocalTimeZone(TimeZoneInfo.FindSystemTimeZoneById("Europe/Berlin")){};
+            fakeLocalTimeZone = new FakeLocalTimeZone(TimeZoneInfo.FindSystemTimeZoneById("Europe/Berlin")) { };
         }
 
         private void SetQueryBasePath()

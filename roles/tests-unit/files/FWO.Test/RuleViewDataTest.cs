@@ -1,10 +1,12 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
-using FWO.Services.RuleTreeBuilder;
+
 using FWO.Data;
 using FWO.Data.Report;
 using FWO.Report.Data.ViewData;
+using FWO.Services.RuleTreeBuilder;
+
+using NUnit.Framework;
 
 namespace FWO.Test
 {
@@ -55,7 +57,7 @@ namespace FWO.Test
             Assert.That("Infr-AdoIT:X".Equals(resultAdoItId));
         }
 
-        
+
 
     }
 }

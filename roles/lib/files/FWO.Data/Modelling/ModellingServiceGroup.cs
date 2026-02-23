@@ -1,6 +1,8 @@
-using System.Text.Json.Serialization; 
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
+
 using FWO.Basics;
+
+using Newtonsoft.Json;
 
 namespace FWO.Data.Modelling
 {
@@ -20,7 +22,7 @@ namespace FWO.Data.Modelling
 
 
         public ModellingServiceGroup()
-        {}
+        { }
 
         public ModellingServiceGroup(ModellingServiceGroup svcGroup) : base(svcGroup)
         {
@@ -49,7 +51,7 @@ namespace FWO.Data.Modelling
                 Id = Id,
                 Name = Name ?? "",
                 Comment = Comment ?? "",
-                Type = new NetworkServiceType(){ Name = ServiceType.Group },
+                Type = new NetworkServiceType() { Name = ServiceType.Group },
                 ServiceGroups = serviceGroups,
                 ServiceGroupFlats = serviceGroupFlats,
                 MemberNames = string.Join("|", Array.ConvertAll(serviceGroups, o => o.Object?.Name))
@@ -77,12 +79,12 @@ namespace FWO.Data.Modelling
 
         public static Group<NetworkService>[] ResolveAsNetworkServiceGroup(List<ModellingServiceWrapper> wrappedList)
         {
-            return Array.ConvertAll(wrappedList.ToArray(), wrapper => new Group<NetworkService> {Id = wrapper.Content.Id, Object = ModellingService.ToNetworkService(wrapper.Content)});
+            return Array.ConvertAll(wrappedList.ToArray(), wrapper => new Group<NetworkService> { Id = wrapper.Content.Id, Object = ModellingService.ToNetworkService(wrapper.Content) });
         }
 
         public static GroupFlat<NetworkService>[] ResolveAsNetworkServiceGroupFlat(List<ModellingServiceWrapper> wrappedList)
         {
-            return Array.ConvertAll(wrappedList.ToArray(), wrapper => new GroupFlat<NetworkService> {Id = wrapper.Content.Id, Object = ModellingService.ToNetworkService(wrapper.Content)});
+            return Array.ConvertAll(wrappedList.ToArray(), wrapper => new GroupFlat<NetworkService> { Id = wrapper.Content.Id, Object = ModellingService.ToNetworkService(wrapper.Content) });
         }
     }
 }

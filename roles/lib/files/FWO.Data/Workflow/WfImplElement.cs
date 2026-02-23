@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization; 
+using System.Text.Json.Serialization;
+
 using Newtonsoft.Json;
 
 namespace FWO.Data.Workflow
@@ -18,7 +19,7 @@ namespace FWO.Data.Workflow
         public Cidr? CidrEnd { get; set; } = new();
 
         public WfImplElement()
-        {}
+        { }
 
         public WfImplElement(WfImplElement element) : base(element)
         {

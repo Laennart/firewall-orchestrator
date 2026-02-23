@@ -1,12 +1,14 @@
-﻿using FWO.Logging;
-using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 
+using FWO.Logging;
+
+using Microsoft.IdentityModel.Tokens;
+
 namespace FWO.Config.File
 {
-    public class KeyImporter
+    public static class KeyImporter
     {
         public static RsaSecurityKey? ExtractKeyFromPem(string rawKey, bool isPrivateKey)
         {
@@ -72,7 +74,7 @@ namespace FWO.Config.File
                 Log.WriteError("Key extraction", "Error while trying to read key from file.", exception);
                 throw;
             }
-          
+
             Log.WriteDebug("Key extraction", "Key was succesfully extracted.");
             return (keyText, isRsaKey);
         }

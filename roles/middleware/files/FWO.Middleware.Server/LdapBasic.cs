@@ -1,11 +1,13 @@
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+
 using FWO.Basics.Exceptions;
 using FWO.Data;
 using FWO.Data.Middleware;
 using FWO.Encryption;
 using FWO.Logging;
+
 using Novell.Directory.Ldap;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
 
 namespace FWO.Middleware.Server
 {
@@ -47,9 +49,9 @@ namespace FWO.Middleware.Server
         {
             try
             {
-                LdapConnectionOptions ldapOptions = new ();
+                LdapConnectionOptions ldapOptions = new();
                 if (Tls) ldapOptions.ConfigureRemoteCertificateValidationCallback((object sen, X509Certificate? cer, X509Chain? cha, SslPolicyErrors err) => true); // todo: allow real cert validation     
-                LdapConnection connection = new (ldapOptions) { SecureSocketLayer = Tls, ConnectionTimeout = timeOutInMs };
+                LdapConnection connection = new(ldapOptions) { SecureSocketLayer = Tls, ConnectionTimeout = timeOutInMs };
                 await connection.ConnectAsync(Address, Port);
 
                 return connection;
@@ -304,7 +306,7 @@ namespace FWO.Middleware.Server
         {
             return user.GetAttributeSet().ContainsKey("givenName") ? user.Get("givenName").StringValue : "";
         }
-        
+
         /// <summary>
         /// Get the last name for the given user
         /// </summary>
@@ -333,17 +335,17 @@ namespace FWO.Middleware.Server
             }
             return "";
         }
-        
+
         /// <summary>
         /// Get the tenant name for the given user
         /// </summary>
         /// <returns>tenant name of the given user</returns>
         public string GetTenantName(LdapEntry user)
         {
-            DistName dn = new (user.Dn);
-            return dn.GetTenantNameViaLdapTenantLevel (TenantLevel);
+            DistName dn = new(user.Dn);
+            return dn.GetTenantNameViaLdapTenantLevel(TenantLevel);
         }
-        
+
         /// <summary>
         /// Get the groups for the given user
         /// </summary>
@@ -408,7 +410,7 @@ namespace FWO.Middleware.Server
                 if (await TryBind(connection, WriteUser, WriteUserPwd))
                 {
                     // authentication was successful: set new password
-                    LdapAttribute attribute = new ("userPassword", newPassword);
+                    LdapAttribute attribute = new("userPassword", newPassword);
                     LdapModification[] mods = [new LdapModification(LdapModification.Replace, attribute)];
 
                     await connection.ModifyAsync(userDn, mods);
@@ -483,7 +485,7 @@ namespace FWO.Middleware.Server
                 await TryBind(connection, WriteUser, WriteUserPwd);
 
                 string userName = new DistName(userDn).UserName;
-                LdapAttributeSet attributeSet = new ()
+                LdapAttributeSet attributeSet = new()
                 {
                     new LdapAttribute("objectclass", "inetOrgPerson"),
                     new LdapAttribute("sn", userName),
@@ -493,7 +495,7 @@ namespace FWO.Middleware.Server
                     new LdapAttribute("mail", email)
                 };
 
-                LdapEntry newEntry = new (userDn, attributeSet);
+                LdapEntry newEntry = new(userDn, attributeSet);
 
                 try
                 {
@@ -527,8 +529,8 @@ namespace FWO.Middleware.Server
                 using LdapConnection connection = await Connect();
                 // Authenticate as write user
                 await TryBind(connection, WriteUser, WriteUserPwd);
-                LdapAttribute attribute = new ("mail", email);
-                LdapModification[] mods = [new (LdapModification.Replace, attribute)];
+                LdapAttribute attribute = new("mail", email);
+                LdapModification[] mods = [new(LdapModification.Replace, attribute)];
 
                 try
                 {

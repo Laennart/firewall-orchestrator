@@ -1,4 +1,5 @@
 using FWO.Api.Client;
+
 using NSubstitute;
 
 namespace FWO.Test.Mocks
@@ -19,5 +20,5 @@ namespace FWO.Test.Mocks
                 SentQueries.Add((query, vars));
             });
         }
-    }    
+    }
 }

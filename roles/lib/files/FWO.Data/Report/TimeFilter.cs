@@ -1,4 +1,5 @@
-using System.Text.Json.Serialization; 
+using System.Text.Json.Serialization;
+
 using Newtonsoft.Json;
 
 
@@ -11,7 +12,7 @@ namespace FWO.Data.Report
         Fixeddates = 2
     }
 
-    public class TimeRangeShortcuts
+    public static class TimeRangeShortcuts
     {
         // of course an enum would be better, but there are already values with blanks in the database
         public static List<string> Ranges =

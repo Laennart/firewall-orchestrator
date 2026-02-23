@@ -1,4 +1,5 @@
-using System.Text.Json.Serialization; 
+using System.Text.Json.Serialization;
+
 using Newtonsoft.Json;
 
 namespace FWO.Data
@@ -83,10 +84,10 @@ namespace FWO.Data
         public long Number;
         public bool IsSurplus = false;
 
-        public NetworkService ()
-        {}
+        public NetworkService()
+        { }
 
-        public NetworkService (NetworkService networkService)
+        public NetworkService(NetworkService networkService)
         {
             Id = networkService.Id;
             Name = networkService.Name;

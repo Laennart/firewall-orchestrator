@@ -1,11 +1,12 @@
-﻿using FWO.Api.Client.Queries;
+using System.Text.Json;
+using System.Text.RegularExpressions;
+
+using FWO.Api.Client.Queries;
 using FWO.Basics;
 using FWO.Data;
 using FWO.Data.Modelling;
 using FWO.Data.Report;
 using FWO.Logging;
-using System.Text.Json;
-using System.Text.RegularExpressions;
 
 namespace FWO.Services
 {
@@ -172,7 +173,7 @@ namespace FWO.Services
 
         private async Task GetRuleDevices(int mgtId, ModellingFilter modellingFilter)
         {
-            if(modellingFilter.AnalyseRemainingRules || modellingFilter.RulesForDeletedConns)
+            if (modellingFilter.AnalyseRemainingRules || modellingFilter.RulesForDeletedConns)
             {
                 DeviceRules[mgtId] = await apiConnection.SendQueryAsync<List<DeviceReport>>(DeviceQueries.getDevicesWithRulebaseLinks, new { mgmId = mgtId });
             }

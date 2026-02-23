@@ -1,9 +1,10 @@
+using System.Text.Json;
+
 using FWO.Basics;
 using FWO.Basics.Interfaces;
 using FWO.Data;
 using FWO.Logging;
 using FWO.Ui.Display;
-using System.Text.Json;
 
 namespace FWO.Report.Data.ViewData
 {
@@ -32,7 +33,7 @@ namespace FWO.Report.Data.ViewData
 
         public Rule? DataObject { get; set; }
         public bool Show { get; set; } = true;
-        public ILogger Logger  {get; set; } = new Logger();
+        public ILogger Logger { get; set; } = new Logger();
 
         public RuleViewData()
         {
@@ -134,7 +135,7 @@ namespace FWO.Report.Data.ViewData
 
             return installOn;
         }
-        
+
         private string SafeCall(Rule rule, string column, Func<string> func)
         {
             try

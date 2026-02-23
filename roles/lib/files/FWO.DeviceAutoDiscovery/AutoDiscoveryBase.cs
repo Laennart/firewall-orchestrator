@@ -1,8 +1,9 @@
-﻿using FWO.Api.Client;
+using System.Text.Json;
+
+using FWO.Api.Client;
 using FWO.Data;
 using FWO.Encryption;
 using FWO.Logging;
-using System.Text.Json;
 
 namespace FWO.DeviceAutoDiscovery
 {

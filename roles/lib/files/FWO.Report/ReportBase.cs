@@ -1,3 +1,7 @@
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
+
 using FWO.Api.Client;
 using FWO.Basics;
 using FWO.Basics.Exceptions;
@@ -6,13 +10,12 @@ using FWO.Data.Report;
 using FWO.Logging;
 using FWO.Report.Data;
 using FWO.Report.Filter;
-using System.Text;
-using System.Reflection;
-using PuppeteerSharp;
-using PuppeteerSharp.Media;
-using PuppeteerSharp.BrowserData;
+
 using HtmlAgilityPack;
-using System.Runtime.InteropServices;
+
+using PuppeteerSharp;
+using PuppeteerSharp.BrowserData;
+using PuppeteerSharp.Media;
 
 namespace FWO.Report
 {

@@ -1,6 +1,8 @@
+using System.Text.Json.Serialization;
+
 using FWO.Basics;
+
 using Newtonsoft.Json;
-using System.Text.Json.Serialization; 
 
 namespace FWO.Data
 {
@@ -81,7 +83,7 @@ namespace FWO.Data
 
             return $"{Name}{appIdPart}";
         }
-        
+
         public string DisplayWithoutAppId(string comSvcTxt)
         {
             if (CommSvcPossible)
@@ -103,7 +105,7 @@ namespace FWO.Data
 
         public int CompareTo(FwoOwner secondOwner)
         {
-            if(Id <= 0 || secondOwner.Id <= 0)
+            if (Id <= 0 || secondOwner.Id <= 0)
             {
                 return Id.CompareTo(secondOwner.Id);
             }

@@ -1,5 +1,6 @@
-using Newtonsoft.Json;
 using System.Text.Json.Serialization;
+
+using Newtonsoft.Json;
 
 namespace FWO.Data.Report
 {
@@ -7,7 +8,7 @@ namespace FWO.Data.Report
     {
         [JsonProperty("complianceCheckScheduledDiffReportsIntervals"), JsonPropertyName("complianceCheckScheduledDiffReportsIntervals")]
         public Dictionary<int, int> ScheduledDiffReportsIntervals { get; set; } = new();
-        
+
     }
-    
+
 }

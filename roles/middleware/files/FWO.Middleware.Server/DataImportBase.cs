@@ -1,9 +1,10 @@
-﻿using FWO.Api.Client;
+using System.Diagnostics;
+
+using FWO.Api.Client;
 using FWO.Api.Client.Queries;
-using FWO.Data;
 using FWO.Config.Api;
+using FWO.Data;
 using FWO.Logging;
-using System.Diagnostics; 
 
 namespace FWO.Middleware.Server
 {
@@ -84,7 +85,7 @@ namespace FWO.Middleware.Server
             }
             return false;
         }
-        
+
         /// <summary>
         /// Add a log entry
         /// </summary>

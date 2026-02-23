@@ -1,3 +1,6 @@
+using System.Collections.Concurrent;
+using System.Reflection;
+
 using FWO.Api.Client.Queries;
 using FWO.Basics;
 using FWO.Compliance;
@@ -6,11 +9,12 @@ using FWO.Data;
 using FWO.Logging;
 using FWO.Test.Fixtures;
 using FWO.Test.Mocks;
+
 using NetTools;
+
 using NSubstitute;
+
 using NUnit.Framework;
-using System.Collections.Concurrent;
-using System.Reflection;
 
 namespace FWO.Test
 {

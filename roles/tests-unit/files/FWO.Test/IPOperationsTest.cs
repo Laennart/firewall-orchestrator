@@ -1,7 +1,10 @@
 using System.Net;
-using NetTools;
-using NUnit.Framework;
+
 using FWO.Basics;
+
+using NetTools;
+
+using NUnit.Framework;
 using NUnit.Framework.Legacy;
 
 namespace FWO.Test
@@ -256,7 +259,7 @@ namespace FWO.Test
             Assert.That(!result);
         }
 
-                [Test]
+        [Test]
         public void GetIPAdressRange_FullRangeIPv4_Succeeds()
         {
             // Arrange

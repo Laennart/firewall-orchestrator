@@ -1,4 +1,4 @@
-﻿using FWO.Logging;
+using FWO.Logging;
 
 namespace FWO.Api.Client.Queries
 {
@@ -6,8 +6,8 @@ namespace FWO.Api.Client.Queries
     {
         public static readonly string getNotifications;
         public static readonly string addNotification;
-		public static readonly string updateNotification;
-		public static readonly string updateNotificationLastSent;
+        public static readonly string updateNotification;
+        public static readonly string updateNotificationLastSent;
         public static readonly string deleteNotification;
 
 
@@ -17,8 +17,8 @@ namespace FWO.Api.Client.Queries
             {
                 getNotifications = File.ReadAllText(QueryPath + "notification/getNotifications.graphql");
                 addNotification = File.ReadAllText(QueryPath + "notification/addNotification.graphql");
-				updateNotification = File.ReadAllText(QueryPath + "notification/updateNotification.graphql");
-				updateNotificationLastSent = File.ReadAllText(QueryPath + "notification/updateNotificationLastSent.graphql");
+                updateNotification = File.ReadAllText(QueryPath + "notification/updateNotification.graphql");
+                updateNotificationLastSent = File.ReadAllText(QueryPath + "notification/updateNotificationLastSent.graphql");
                 deleteNotification = File.ReadAllText(QueryPath + "notification/deleteNotification.graphql");
             }
             catch (Exception exception)

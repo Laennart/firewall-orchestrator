@@ -1,17 +1,19 @@
-﻿using FWO.Api.Client;
+using System.Collections.Concurrent;
+using System.Net;
+
+using FWO.Api.Client;
 using FWO.Api.Client.Queries;
 using FWO.Basics;
-using FWO.Basics.Interfaces;
 using FWO.Basics.Enums;
+using FWO.Basics.Interfaces;
 using FWO.Config.Api;
 using FWO.Data;
-using NetTools;
-using FWO.Logging;
-using FWO.Ui.Display;
 using FWO.Data.Extensions;
-using System.Net;
-using System.Collections.Concurrent;
+using FWO.Logging;
 using FWO.Services;
+using FWO.Ui.Display;
+
+using NetTools;
 
 namespace FWO.Compliance
 {
@@ -228,7 +230,7 @@ namespace FWO.Compliance
 
                 Logger.TryWriteInfo("Compliance Check", $"Compliance check evaluated {RulesInCheck.Count} rules in {elapsed.TotalSeconds} seconds.", true);
                 Logger.TryWriteInfo("Compliance Check", "Compliance check completed.", true);
-                 
+
             }
             catch (Exception e)
             {
@@ -316,7 +318,7 @@ namespace FWO.Compliance
 
             HashSet<string> currentKeySet = currentViolationsWithKeys.Select(v => v.Key).ToHashSet(StringComparer.Ordinal);
             HashSet<string> dbKeySet = dbViolationsWithKeys.Select(v => v.Key).ToHashSet(StringComparer.Ordinal);
-            
+
             ParallelOptions parallelOptions = new()
             {
                 MaxDegreeOfParallelism = Math.Max(1, _maxDegreeOfParallelism)

@@ -1,7 +1,8 @@
 using System.Text;
+
 using FWO.Basics;
-using FWO.Data;
 using FWO.Config.Api;
+using FWO.Data;
 using FWO.Report.Filter;
 
 namespace FWO.Ui.Display
@@ -116,7 +117,7 @@ namespace FWO.Ui.Display
         public string DisplayRuleJsonObject(Rule rule, ReportType reportType)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            
+
             stringBuilder.Append('{');
             if (string.IsNullOrEmpty(rule.SectionHeader))
             {
@@ -170,7 +171,7 @@ namespace FWO.Ui.Display
                 {
                     displayedServices.Add(Quote(DisplayService(service, reportType).ToString()));
                 }
-                return(string.Join(",", displayedServices));
+                return (string.Join(",", displayedServices));
             }
             return "";
         }

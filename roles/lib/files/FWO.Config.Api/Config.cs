@@ -1,10 +1,11 @@
-﻿using FWO.Api.Client;
-using FWO.Api.Client.Queries;
-using FWO.Config.Api.Data;
-using FWO.Logging;
 using System.ComponentModel;
 using System.Reflection;
 using System.Text.Json.Serialization;
+
+using FWO.Api.Client;
+using FWO.Api.Client.Queries;
+using FWO.Config.Api.Data;
+using FWO.Logging;
 
 namespace FWO.Config.Api
 {
@@ -34,18 +35,18 @@ namespace FWO.Config.Api
         public async Task InitWithUserId(ApiConnection apiConnection, int userId, bool withSubscription = false)
         {
             this.apiConnection = apiConnection;
-            if(withSubscription) // used in Ui context
+            if (withSubscription) // used in Ui context
             {
                 UserId = userId;
                 List<string> ignoreKeys = []; // currently nothing ignored, may be used later
                 apiConnection.GetSubscription<ConfigItem[]>(SubscriptionExceptionHandler, SubscriptionUpdateHandler,
-                    ConfigQueries.subscribeConfigChangesByUser, new { UserId , ignoreKeys });
+                    ConfigQueries.subscribeConfigChangesByUser, new { UserId, ignoreKeys });
                 await Task.Run(async () => { while (!Initialized) { await Task.Delay(10); } }); // waitForFirstUpdate
             }
             else // when only simple read is needed, e.g. during scheduled report in middleware server
             {
                 ConfigItem[] configItems = await apiConnection.SendQueryAsync<ConfigItem[]>(ConfigQueries.getConfigItemsByUser, new { User = UserId });
-                if(configItems.Length > 0)
+                if (configItems.Length > 0)
                 {
                     Update(configItems);
                     RawConfigItems = configItems;
@@ -96,7 +97,7 @@ namespace FWO.Config.Api
                     }
                 }
             }
-            foreach(var name in remainingConfigItemNames.Where(n => !n.Contains("StateMatrix"))) // StateMatrix ConfigItems are handled separately
+            foreach (var name in remainingConfigItemNames.Where(n => !n.Contains("StateMatrix"))) // StateMatrix ConfigItems are handled separately
             {
                 Log.WriteDebug($"Load {(UserId == 0 ? "Global " : "")}Config Items", $"Config item with key \"{name}\" could not be found. {(UserId == 0 ? "" : "User might not have customized the setting. ")}Using default value.");
             }
@@ -144,7 +145,7 @@ namespace FWO.Config.Api
         {
             await semaphoreSlim.WaitAsync();
             try
-            { 
+            {
                 return (ConfigData)CloneEditable();
             }
             finally { semaphoreSlim.Release(); }

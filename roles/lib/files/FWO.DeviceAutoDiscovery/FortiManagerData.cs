@@ -1,6 +1,7 @@
-using Newtonsoft.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
+using Newtonsoft.Json;
 
 namespace FWO.DeviceAutoDiscovery
 {

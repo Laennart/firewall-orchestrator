@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+
 using Newtonsoft.Json;
 
 namespace FWO.Data
@@ -60,8 +61,8 @@ namespace FWO.Data
 
 
         public DeviceType()
-        {}
-        
+        { }
+
         public DeviceType(DeviceType deviceType)
         {
             Id = deviceType.Id;
@@ -104,7 +105,7 @@ namespace FWO.Data
 
         public bool CanBeAutodiscovered(Management mgmt)
         {
-            return !IsUri(mgmt.Hostname) && (SupermanagerMap.ContainsValue(Id) || (CheckPointManagers.Contains(Id) && mgmt.SuperManagerId==null));
+            return !IsUri(mgmt.Hostname) && (SupermanagerMap.ContainsValue(Id) || (CheckPointManagers.Contains(Id) && mgmt.SuperManagerId == null));
         }
 
         private static bool IsUri(string hostname)

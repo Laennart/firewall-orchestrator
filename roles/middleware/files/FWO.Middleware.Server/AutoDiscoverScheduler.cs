@@ -1,24 +1,25 @@
-﻿using FWO.Api.Client;
+using System.Timers;
+
+using FWO.Api.Client;
 using FWO.Api.Client.Queries;
 using FWO.Basics;
-using FWO.Data;
 using FWO.Config.Api;
 using FWO.Config.Api.Data;
-using FWO.Logging;
-using System.Timers;
+using FWO.Data;
 using FWO.DeviceAutoDiscovery;
+using FWO.Logging;
 
 namespace FWO.Middleware.Server
 {
-	/// <summary>
-	/// Class handling the scheduler for the autodiscovery
-	/// </summary>
+    /// <summary>
+    /// Class handling the scheduler for the autodiscovery
+    /// </summary>
     public class AutoDiscoverScheduler : SchedulerBase
     {
         private long? lastMgmtAlertId;
         private const string LogMessageTitle = GlobalConst.kAutodiscovery;
 
-		/// <summary>
+        /// <summary>
         /// Async Constructor needing the connection
         /// </summary>
         public static async Task<AutoDiscoverScheduler> CreateAsync(ApiConnection apiConnection)
@@ -26,14 +27,14 @@ namespace FWO.Middleware.Server
             GlobalConfig globalConfig = await GlobalConfig.ConstructAsync(apiConnection, true);
             return new AutoDiscoverScheduler(apiConnection, globalConfig);
         }
-    
+
         private AutoDiscoverScheduler(ApiConnection apiConnection, GlobalConfig globalConfig)
             : base(apiConnection, globalConfig, ConfigQueries.subscribeAutodiscoveryConfigChanges, SchedulerInterval.Hours, "Autodiscover")
-        {}
+        { }
 
-		/// <summary>
-		/// set scheduling timer from config values
-		/// </summary>
+        /// <summary>
+        /// set scheduling timer from config values
+        /// </summary>
         protected override void OnGlobalConfigChange(List<ConfigItem> config)
         {
             ScheduleTimer.Stop();
@@ -53,7 +54,7 @@ namespace FWO.Middleware.Server
                 {
                     try
                     {
-                        AutoDiscoveryBase autodiscovery = new (superManagement, apiConnection);
+                        AutoDiscoveryBase autodiscovery = new(superManagement, apiConnection);
 
                         List<Management> diffList = await autodiscovery.Run();
                         List<ActionItem> actions = autodiscovery.ConvertToActions(diffList);

@@ -1,3 +1,5 @@
+using System.Security.Claims;
+
 using FWO.Api.Client;
 using FWO.Basics;
 using FWO.Config.Api;
@@ -6,10 +8,11 @@ using FWO.Data;
 using FWO.Data.Middleware;
 using FWO.Logging;
 using FWO.Report;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 using Newtonsoft.Json;
-using System.Security.Claims;
 
 namespace FWO.Middleware.Server.Controllers
 {

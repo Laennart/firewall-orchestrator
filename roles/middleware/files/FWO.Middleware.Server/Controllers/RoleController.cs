@@ -1,10 +1,12 @@
+using System.Collections.Concurrent;
+
 using FWO.Basics;
 using FWO.Data;
 using FWO.Data.Middleware;
 using FWO.Logging;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Concurrent;
 
 namespace FWO.Middleware.Server.Controllers
 {
@@ -18,9 +20,9 @@ namespace FWO.Middleware.Server.Controllers
     {
         private readonly List<Ldap> ldaps;
 
-		/// <summary>
-		/// Constructor needing ldap list
-		/// </summary>
+        /// <summary>
+        /// Constructor needing ldap list
+        /// </summary>
         public RoleController(List<Ldap> ldaps)
         {
             this.ldaps = ldaps;
@@ -43,7 +45,7 @@ namespace FWO.Middleware.Server.Controllers
             {
                 if (currentLdap.HasRoleHandling())
                 {
-                    ldapRoleRequests.Add(Task.Run(async() =>
+                    ldapRoleRequests.Add(Task.Run(async () =>
                     {
                         // if current Ldap has roles stored: Get all roles from current Ldap
                         List<RoleGetReturnParameters> currentRoles = await currentLdap.GetAllRoles();
@@ -80,7 +82,7 @@ namespace FWO.Middleware.Server.Controllers
                 // Try to add user to role in current Ldap
                 if (currentLdap.IsWritable() && currentLdap.HasRoleHandling())
                 {
-                    ldapRoleRequests.Add(Task.Run(async() =>
+                    ldapRoleRequests.Add(Task.Run(async () =>
                     {
                         if (await currentLdap.AddUserToEntry(parameters.UserDn, parameters.Role))
                         {
@@ -118,7 +120,7 @@ namespace FWO.Middleware.Server.Controllers
                 // Try to remove user from role in current Ldap
                 if (currentLdap.IsWritable() && currentLdap.HasRoleHandling())
                 {
-                    ldapRoleRequests.Add(Task.Run(async() =>
+                    ldapRoleRequests.Add(Task.Run(async () =>
                     {
                         if (await currentLdap.RemoveUserFromEntry(parameters.UserDn, parameters.Role))
                         {

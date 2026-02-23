@@ -1,19 +1,21 @@
-﻿using FWO.Api.Client;
+using System.Text;
+using System.Text.Json.Serialization;
+using System.Text.RegularExpressions;
+
+using FWO.Api.Client;
 using FWO.Api.Client.Queries;
 using FWO.Basics;
 using FWO.Basics.Exceptions;
+using FWO.Config.Api;
 using FWO.Data;
 using FWO.Data.Report;
-using FWO.Config.Api;
+using FWO.Encryption;
 using FWO.Logging;
 using FWO.Mail;
-using FWO.Encryption;
 using FWO.Report;
 using FWO.Services;
+
 using Newtonsoft.Json;
-using System.Text.Json.Serialization;
-using System.Text;
-using System.Text.RegularExpressions;
 
 namespace FWO.Middleware.Server
 {

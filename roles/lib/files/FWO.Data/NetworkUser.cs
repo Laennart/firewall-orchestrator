@@ -1,4 +1,5 @@
-using System.Text.Json.Serialization; 
+using System.Text.Json.Serialization;
+
 using Newtonsoft.Json;
 
 namespace FWO.Data
@@ -45,10 +46,10 @@ namespace FWO.Data
         public string MemberRefs { get; set; } = "";
 
         [JsonProperty("usergrps"), JsonPropertyName("usergrps")]
-        public Group<NetworkUser>[] UserGroups { get; set; } = new Group<NetworkUser>[]{};
+        public Group<NetworkUser>[] UserGroups { get; set; } = new Group<NetworkUser>[] { };
 
         [JsonProperty("usergrp_flats"), JsonPropertyName("usergrp_flats")]
-        public GroupFlat<NetworkUser>[] UserGroupFlats { get; set; } = new GroupFlat<NetworkUser>[]{};
+        public GroupFlat<NetworkUser>[] UserGroupFlats { get; set; } = new GroupFlat<NetworkUser>[] { };
 
         public override bool Equals(object? obj)
         {

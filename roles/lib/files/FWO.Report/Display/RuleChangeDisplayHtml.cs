@@ -1,8 +1,8 @@
+using FWO.Basics;
+using FWO.Config.Api;
 using FWO.Data;
 using FWO.Logging;
-using FWO.Config.Api;
 using FWO.Report;
-using FWO.Basics;
 
 namespace FWO.Ui.Display
 {
@@ -55,7 +55,8 @@ namespace FWO.Ui.Display
             {
                 case 'D': return OutputHtmlDeleted(DisplaySource(ruleChange.OldRule, location, reportType, 0, GlobalConst.kStyleDeleted));
                 case 'I': return OutputHtmlAdded(DisplaySource(ruleChange.NewRule, location, reportType, 0, GlobalConst.kStyleAdded));
-                case 'C': return DisplayArrayDiff(DisplaySource(ruleChange.OldRule, location, reportType),
+                case 'C':
+                    return DisplayArrayDiff(DisplaySource(ruleChange.OldRule, location, reportType),
                                                   DisplaySource(ruleChange.NewRule, location, reportType),
                                                   ruleChange.OldRule.SourceNegated, ruleChange.NewRule.SourceNegated);
                 default: ThrowErrorUnknowChangeAction(ruleChange.ChangeAction); return "";
@@ -79,7 +80,8 @@ namespace FWO.Ui.Display
             {
                 case 'D': return OutputHtmlDeleted(DisplayDestination(ruleChange.OldRule, location, reportType, 0, GlobalConst.kStyleDeleted));
                 case 'I': return OutputHtmlAdded(DisplayDestination(ruleChange.NewRule, location, reportType, 0, GlobalConst.kStyleAdded));
-                case 'C': return DisplayArrayDiff(DisplayDestination(ruleChange.OldRule, location, reportType),
+                case 'C':
+                    return DisplayArrayDiff(DisplayDestination(ruleChange.OldRule, location, reportType),
                                                   DisplayDestination(ruleChange.NewRule, location, reportType),
                                                   ruleChange.OldRule.DestinationNegated, ruleChange.NewRule.DestinationNegated);
                 default: ThrowErrorUnknowChangeAction(ruleChange.ChangeAction); return "";
@@ -92,7 +94,8 @@ namespace FWO.Ui.Display
             {
                 case 'D': return OutputHtmlDeleted(DisplayServices(ruleChange.OldRule, location, reportType, 0, GlobalConst.kStyleDeleted));
                 case 'I': return OutputHtmlAdded(DisplayServices(ruleChange.NewRule, location, reportType, 0, GlobalConst.kStyleAdded));
-                case 'C': return DisplayArrayDiff(DisplayServices(ruleChange.OldRule, location, reportType),
+                case 'C':
+                    return DisplayArrayDiff(DisplayServices(ruleChange.OldRule, location, reportType),
                                                   DisplayServices(ruleChange.NewRule, location, reportType),
                                                   ruleChange.OldRule.ServiceNegated, ruleChange.NewRule.ServiceNegated);
                 default: ThrowErrorUnknowChangeAction(ruleChange.ChangeAction); return "";
@@ -196,7 +199,7 @@ namespace FWO.Ui.Display
                 List<string> added = [];
                 List<string> deleted = [];
 
-                if(oldNegated != newNegated)
+                if (oldNegated != newNegated)
                 {
                     deleted.Add(SetStyle(oldElement, GlobalConst.kStyleDeleted));
                     added.Add(SetStyle(newElement, GlobalConst.kStyleAdded));
@@ -232,15 +235,15 @@ namespace FWO.Ui.Display
                        + (added.Count > 0 ? $"{userConfig.GetText("added")}: <p style=\"{GlobalConst.kStyleAdded}\">{string.Join("<br>", added)}</p>" : "");
             }
         }
-        
+
         private static string OutputHtmlDeleted(string? input)
         {
-            return  input != null && input != "" ? $"<p style=\"{GlobalConst.kStyleDeleted}\">{input}</p>" : "";
+            return input != null && input != "" ? $"<p style=\"{GlobalConst.kStyleDeleted}\">{input}</p>" : "";
         }
 
         private static string OutputHtmlAdded(string? input)
         {
-            return  input != null && input != "" ? $"<p style=\"{GlobalConst.kStyleAdded}\">{input}</p>" : "";
+            return input != null && input != "" ? $"<p style=\"{GlobalConst.kStyleAdded}\">{input}</p>" : "";
         }
 
         private static string SetStyle(string input, string style)

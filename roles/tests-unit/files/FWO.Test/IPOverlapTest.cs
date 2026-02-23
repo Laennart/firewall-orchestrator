@@ -1,5 +1,6 @@
-﻿using NUnit.Framework;
 using FWO.Basics;
+
+using NUnit.Framework;
 
 namespace FWO.Test
 {
@@ -61,6 +62,6 @@ namespace FWO.Test
 
             Assert.That(Is.Equals(ipsThatOverlapped, ipsShouldOverlap.Count));
         }
-        
+
     }
 }

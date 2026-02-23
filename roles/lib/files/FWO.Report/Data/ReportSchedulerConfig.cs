@@ -1,4 +1,5 @@
-using System.Text.Json.Serialization; 
+using System.Text.Json.Serialization;
+
 using Newtonsoft.Json;
 
 namespace FWO.Report.Data
@@ -24,9 +25,9 @@ namespace FWO.Report.Data
 
         public ReportSchedulerConfig()
         {
-            
+
         }
-        
+
         public ReportSchedulerConfig(int id)
         {
             ReportScheduleID = id;

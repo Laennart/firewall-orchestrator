@@ -1,6 +1,8 @@
 using System.Net;
-using NetTools;
+
 using FWO.Basics;
+
+using NetTools;
 
 namespace FWO.Basics.Comparer
 {
@@ -8,10 +10,10 @@ namespace FWO.Basics.Comparer
     {
         public int Compare(IPAddress? x, IPAddress? y)
         {
-            if(x is null || y is null)
+            if (x is null || y is null)
             {
                 return 0;
-            } 
+            }
 
             int compareIPFamiliesResult = IpOperations.CompareIpFamilies(x, y);
 

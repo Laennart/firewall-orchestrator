@@ -1,16 +1,20 @@
-using NUnit.Framework;
-using FWO.Services;
-using FWO.Data;
-using NetTools;
-using FWO.Basics;
 using System.Net;
-using NSubstitute;
+using System.Reflection;
+
 using FWO.Api.Client;
 using FWO.Api.Client.Queries;
+using FWO.Basics;
 using FWO.Config.Api;
-using System.Reflection;
-using FWO.Test.Tools.CustomAssert;
+using FWO.Data;
+using FWO.Services;
 using FWO.Test.Mocks;
+using FWO.Test.Tools.CustomAssert;
+
+using NetTools;
+
+using NSubstitute;
+
+using NUnit.Framework;
 
 namespace FWO.Test
 {
@@ -351,7 +355,7 @@ namespace FWO.Test
             AssertThatGeneric.PropertyIsTrue(secondSentQuery.Item2, "isAutoCalculatedInternetZone");
             AssertThatGeneric.PropertyIsEqual(secondSentQuery.Item2, "networkZoneId", 4);
         }
-        
+
         private static object? GetFromGeneric(object o, string name) => o.GetType().GetProperty(name)?.GetValue(o);
 
     }

@@ -1,9 +1,10 @@
-﻿using NUnit.Framework;
-using NUnit.Framework.Legacy;
 using FWO.Data;
-using FWO.Data.Workflow;
 using FWO.Data.Modelling;
+using FWO.Data.Workflow;
 using FWO.ExternalSystems.Tufin.SecureChange;
+
+using NUnit.Framework;
+using NUnit.Framework.Legacy;
 
 namespace FWO.Test
 {
@@ -53,7 +54,7 @@ namespace FWO.Test
                 }
             ]
         };
-        
+
         private static WfReqTask ConstructAccTask(int id, string title, int taskNumber, string taskType, string action)
         {
             return new()
@@ -208,11 +209,11 @@ namespace FWO.Test
 
             ClassicAssert.AreEqual(AccessFilledTicketText, ticket.TicketText);
         }
-        
+
         [Test]
         public async Task TestSCRemoveTicket()
         {
-            SCTicket ticket = new (ticketSystem);
+            SCTicket ticket = new(ticketSystem);
             await ticket.CreateRequestString(removeReqTasks, ipProtos, NamingConvention);
 
             ClassicAssert.AreEqual(RemoveFilledTicketText, ticket.TicketText);

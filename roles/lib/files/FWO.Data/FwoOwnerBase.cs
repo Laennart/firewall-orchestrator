@@ -1,12 +1,14 @@
+using System.Text.Json.Serialization;
+
 using FWO.Basics;
+
 using Newtonsoft.Json;
-using System.Text.Json.Serialization; 
 
 namespace FWO.Data
 {
     public enum RuleOwnershipMode
     {
-        mixed, 
+        mixed,
         exclusive
     }
 

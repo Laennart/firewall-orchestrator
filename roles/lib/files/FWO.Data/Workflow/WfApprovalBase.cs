@@ -1,6 +1,8 @@
-using FWO.Basics;
-using Newtonsoft.Json;
 using System.Text.Json.Serialization;
+
+using FWO.Basics;
+
+using Newtonsoft.Json;
 
 namespace FWO.Data.Workflow
 {
@@ -18,8 +20,8 @@ namespace FWO.Data.Workflow
         [JsonProperty("approver_group"), JsonPropertyName("approver_group")]
         public string? ApproverGroup { get; set; }
 
-//        [JsonProperty("approver"), JsonPropertyName("approver")]
-//        public UiUser? Approver { get; set; }
+        //        [JsonProperty("approver"), JsonPropertyName("approver")]
+        //        public UiUser? Approver { get; set; }
 
         [JsonProperty("approver"), JsonPropertyName("approver")]
         public string? ApproverDn { get; set; } = "";
@@ -43,7 +45,7 @@ namespace FWO.Data.Workflow
             ApproverDn = approval.ApproverDn;
             TenantId = approval.TenantId;
             InitialApproval = approval.InitialApproval;
-         }
+        }
 
         public override bool Sanitize()
         {

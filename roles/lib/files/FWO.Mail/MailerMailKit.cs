@@ -1,10 +1,13 @@
 // source: https://blog.christian-schou.dk/send-emails-with-asp-net-core-with-mailkit/
 
+using FWO.Encryption;
+
 using MailKit.Net.Smtp;
 using MailKit.Security;
-using MimeKit;
+
 using Microsoft.AspNetCore.Http;
-using FWO.Encryption;
+
+using MimeKit;
 
 namespace FWO.Mail
 {

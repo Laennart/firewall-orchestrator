@@ -1,11 +1,14 @@
-using FWO.Api.Client;
-using FWO.Data;
-using FWO.Logging;
-using Newtonsoft.Json;
-using RestSharp;
 using System.Net;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
+using FWO.Api.Client;
+using FWO.Data;
+using FWO.Logging;
+
+using Newtonsoft.Json;
+
+using RestSharp;
 
 
 namespace FWO.DeviceAutoDiscovery

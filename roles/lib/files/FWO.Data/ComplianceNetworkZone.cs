@@ -1,8 +1,11 @@
-﻿using FWO.Basics;
-using NetTools;
-using Newtonsoft.Json;
 using System.Net;
 using System.Text.Json.Serialization;
+
+using FWO.Basics;
+
+using NetTools;
+
+using Newtonsoft.Json;
 
 namespace FWO.Data
 {
@@ -48,7 +51,7 @@ namespace FWO.Data
 
         [JsonProperty("is_auto_calculated_internet_zone"), JsonPropertyName("is_auto_calculated_internet_zone")]
         public bool IsAutoCalculatedInternetZone { get; set; } = false;
-        
+
         [JsonProperty("is_auto_calculated_undefined_internal_zone"), JsonPropertyName("is_auto_calculated_undefined_internal_zone")]
         public bool IsAutoCalculatedUndefinedInternalZone { get; set; } = false;
 

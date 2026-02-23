@@ -1,10 +1,12 @@
-using FWO.Basics;
-using Newtonsoft.Json;
 using System.Text.Json.Serialization;
+
+using FWO.Basics;
+
+using Newtonsoft.Json;
 
 namespace FWO.Data.Workflow
 {
-    public class WfTicketBase: WfStatefulObject
+    public class WfTicketBase : WfStatefulObject
     {
         [JsonProperty("id"), JsonPropertyName("id")]
         public long Id { get; set; }

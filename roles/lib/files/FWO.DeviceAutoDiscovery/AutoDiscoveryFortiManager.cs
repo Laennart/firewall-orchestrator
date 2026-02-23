@@ -1,11 +1,14 @@
+using System.Net;
+
 using FWO.Api.Client;
 using FWO.Api.Client.Queries;
 using FWO.Config.Api;
 using FWO.Data;
 using FWO.Logging;
+
 using MailKit.Security;
+
 using RestSharp;
-using System.Net;
 
 
 namespace FWO.DeviceAutoDiscovery
@@ -48,7 +51,7 @@ namespace FWO.DeviceAutoDiscovery
                     if (string.IsNullOrEmpty(sessionResponse.Data?.SessionId))
                     {
                         errorTxt += $"could not authenticate to {SuperManagement.Name} - got empty session ID";
-                    }                                            
+                    }
                     Log.WriteWarning(Autodiscovery, errorTxt);
                     throw new AuthenticationException(errorTxtCatch);
                 }
@@ -257,7 +260,7 @@ namespace FWO.DeviceAutoDiscovery
             }
             return discoveredDevices;
         }
-        
+
         // #if DEBUG
         //         List<Management> fillTestDevices()
         //         {

@@ -1,22 +1,23 @@
-﻿using FWO.Api.Client;
+using System.Timers;
+
+using FWO.Api.Client;
 using FWO.Api.Client.Queries;
 using FWO.Basics;
 using FWO.Basics.Exceptions;
-using FWO.Data;
 using FWO.Config.Api;
 using FWO.Config.Api.Data;
-using System.Timers;
+using FWO.Data;
 
 namespace FWO.Middleware.Server
 {
-	/// <summary>
-	/// Class handling the scheduler for the import of IP data per area
-	/// </summary>
+    /// <summary>
+    /// Class handling the scheduler for the import of IP data per area
+    /// </summary>
     public class ImportIpDataScheduler : SchedulerBase
     {
         private const string LogMessageTitle = "Import Area IP Data";
 
-		/// <summary>
+        /// <summary>
         /// Async Constructor needing the connection
         /// </summary>
         public static async Task<ImportIpDataScheduler> CreateAsync(ApiConnection apiConnection)
@@ -24,14 +25,14 @@ namespace FWO.Middleware.Server
             GlobalConfig globalConfig = await GlobalConfig.ConstructAsync(apiConnection, true);
             return new ImportIpDataScheduler(apiConnection, globalConfig);
         }
-    
+
         private ImportIpDataScheduler(ApiConnection apiConnection, GlobalConfig globalConfig)
             : base(apiConnection, globalConfig, ConfigQueries.subscribeImportIpDataConfigChanges, SchedulerInterval.Hours, "ImportAreaIPData")
-        {}
+        { }
 
-		/// <summary>
-		/// set scheduling timer from config values
-		/// </summary>
+        /// <summary>
+        /// set scheduling timer from config values
+        /// </summary>
         protected override void OnGlobalConfigChange(List<ConfigItem> config)
         {
             ScheduleTimer.Stop();
@@ -49,7 +50,7 @@ namespace FWO.Middleware.Server
         {
             try
             {
-                AreaIpDataImport import = new (apiConnection, globalConfig);
+                AreaIpDataImport import = new(apiConnection, globalConfig);
                 List<string> FailedImports = await import.Run();
                 if (FailedImports.Count > 0)
                 {

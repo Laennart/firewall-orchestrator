@@ -1,14 +1,18 @@
-﻿using FWO.Config.File;
-using FWO.Logging;
-using Microsoft.IdentityModel.Tokens;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+
+using FWO.Config.File;
+using FWO.Logging;
+
+using Microsoft.IdentityModel.Tokens;
+
+using NUnit.Framework;
+using NUnit.Framework.Legacy;
+
 using Assert = NUnit.Framework.Assert;
 
 namespace FWO.Test

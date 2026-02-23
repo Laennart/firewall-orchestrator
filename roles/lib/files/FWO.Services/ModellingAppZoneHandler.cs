@@ -1,9 +1,10 @@
+using System.Text.Json;
+
 using FWO.Api.Client;
 using FWO.Api.Client.Queries;
+using FWO.Config.Api;
 using FWO.Data;
 using FWO.Data.Modelling;
-using FWO.Config.Api;
-using System.Text.Json;
 
 namespace FWO.Services
 {
@@ -31,7 +32,7 @@ namespace FWO.Services
         {
             allAppServers = await GetAllModelledAppServers();
             ModellingAppZone appZone;
-            if(oldAppZone == null)
+            if (oldAppZone == null)
             {
                 appZone = CreateNewAppZone();
             }
@@ -54,7 +55,7 @@ namespace FWO.Services
             if (!appZone.AlreadyExistsInDb)
             {
                 appZone.Id = await AddAppZoneToDb(appZone);
-                if(appZone.Id > 0)
+                if (appZone.Id > 0)
                 {
                     await AddAppServersToAppZone(appZone.Id, appZone.AppServers);
                 }
@@ -115,7 +116,7 @@ namespace FWO.Services
                 appZone.AppServersUnchanged = unchangedAppServers;
             }
         }
-        
+
         private async Task<long> AddAppZoneToDb(ModellingAppZone appZone)
         {
             var azVars = new
@@ -126,7 +127,7 @@ namespace FWO.Services
                 creator = "CreateAZObjects"
             };
 
-            ReturnId[]? returnIds = ( await apiConnection.SendQueryAsync<ReturnIdWrapper>(ModellingQueries.newAppZone, azVars) ).ReturnIds;
+            ReturnId[]? returnIds = (await apiConnection.SendQueryAsync<ReturnIdWrapper>(ModellingQueries.newAppZone, azVars)).ReturnIds;
             if (returnIds != null && returnIds.Length > 0)
             {
                 await LogChange(ModellingTypes.ChangeType.Insert, ModellingTypes.ModObjectType.AppZone, appZone.Id, $"New App Zone: {appZone.Display()}", null);

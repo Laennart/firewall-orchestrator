@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
+
 using FWO.Basics;
+
 using Newtonsoft.Json;
 
 namespace FWO.Data.Report
@@ -13,7 +15,7 @@ namespace FWO.Data.Report
         public int TenantId { get; set; }
 
         public TenantFilter()
-        {}
+        { }
 
         public TenantFilter(TenantFilter tenantFilter)
         {

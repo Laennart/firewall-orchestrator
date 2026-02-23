@@ -1,7 +1,9 @@
+using System.Text.Json.Serialization;
+
 using FWO.Basics;
 using FWO.Data.Middleware;
+
 using Newtonsoft.Json;
-using System.Text.Json.Serialization; 
 
 namespace FWO.Data
 {
@@ -28,7 +30,7 @@ namespace FWO.Data
         public string? Lastname { get; set; }
 
         [JsonProperty("tenant"), JsonPropertyName("tenant")]
-        public Tenant? Tenant { get; set;}
+        public Tenant? Tenant { get; set; }
 
         [JsonProperty("uiuser_language"), JsonPropertyName("uiuser_language")]
         public string? Language { get; set; }
@@ -43,7 +45,7 @@ namespace FWO.Data
         public bool PasswordMustBeChanged { get; set; }
 
         [JsonProperty("ldap_connection"), JsonPropertyName("ldap_connection")]
-        public UiLdapConnection LdapConnection { get; set;} = new ();
+        public UiLdapConnection LdapConnection { get; set; } = new();
 
         public string Jwt { get; set; } = "";
         public List<string> Roles { get; set; } = [];
@@ -53,10 +55,10 @@ namespace FWO.Data
 
         public UiUser()
         {
-            Tenant = new ();
-            LdapConnection = new ();
+            Tenant = new();
+            LdapConnection = new();
         }
-        
+
         public UiUser(UiUser user)
         {
             Name = user.Name;
@@ -90,13 +92,13 @@ namespace FWO.Data
             Lastname = userGetReturnParameters.Lastname;
             if (userGetReturnParameters.TenantId != 0)
             {
-                Tenant = new (){Id = userGetReturnParameters.TenantId};
+                Tenant = new() { Id = userGetReturnParameters.TenantId };
             }
             Language = userGetReturnParameters.Language;
             LastLogin = userGetReturnParameters.LastLogin;
             LastPasswordChange = userGetReturnParameters.LastPasswordChange;
             PasswordMustBeChanged = userGetReturnParameters.PwChangeRequired;
-            LdapConnection = new (){Id = userGetReturnParameters.LdapId};
+            LdapConnection = new() { Id = userGetReturnParameters.LdapId };
         }
 
         public bool IsInternal()

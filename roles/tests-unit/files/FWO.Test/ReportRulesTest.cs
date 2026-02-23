@@ -1,11 +1,13 @@
+using System.Reflection;
+
 using FWO.Basics;
 using FWO.Data;
 using FWO.Data.Report;
 using FWO.Report;
 using FWO.Test.Mocks;
+
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using System.Reflection;
 
 namespace FWO.Test
 {
@@ -50,7 +52,7 @@ namespace FWO.Test
                         },
                         FromRulebaseId = 0,         //before
                         NextRulebaseId = _rb2.Id,   //myself
-                        LinkType = 2                
+                        LinkType = 2
                     },
                     new RulebaseLink
                     {
@@ -63,7 +65,7 @@ namespace FWO.Test
                                 Rules = _rb1.Rules
                             },
                             NextRulebaseId = _rb1.Id,
-                            FromRulebaseId = _rb2.Id, 
+                            FromRulebaseId = _rb2.Id,
                             FromRuleId = 5,         // Last Rule from _rb2
                             IsSection = true,
                             LinkType = 4
@@ -195,7 +197,7 @@ namespace FWO.Test
 
             Assert.That(result, Is.Empty);
         }
-        
+
         [Test]
         public void Test_CreateRulebaseReport_CreatesExpectedNumberOfRules()
         {

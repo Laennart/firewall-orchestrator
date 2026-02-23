@@ -1,9 +1,10 @@
-﻿using FWO.Report.Filter;
-using FWO.Report.Filter.Exceptions;
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
 using FWO.Basics;
 using FWO.Data.Report;
+using FWO.Report.Filter;
+using FWO.Report.Filter.Exceptions;
+
+using NUnit.Framework;
+using NUnit.Framework.Legacy;
 namespace FWO.Test
 {
     [TestFixture]

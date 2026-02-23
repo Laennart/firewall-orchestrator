@@ -1,5 +1,5 @@
-﻿using FWO.Report.Filter.Exceptions;
 using FWO.Basics;
+using FWO.Report.Filter.Exceptions;
 
 
 namespace FWO.Report.Filter.Ast

@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization; 
+using System.Text.Json.Serialization;
+
 using Newtonsoft.Json;
 
 namespace FWO.Data.Workflow
@@ -21,11 +22,11 @@ namespace FWO.Data.Workflow
     public class WfCommentDataHelper
     {
         [JsonProperty("comment"), JsonPropertyName("comment")]
-        public WfComment Comment { get; set; } = new ();
+        public WfComment Comment { get; set; } = new();
 
 
         public WfCommentDataHelper()
-        {}
+        { }
 
         public WfCommentDataHelper(WfComment comment)
         {

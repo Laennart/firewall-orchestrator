@@ -1,7 +1,8 @@
-﻿using GraphQL;
 using FWO.Data;
 using FWO.Data.Workflow;
 using FWO.Services;
+
+using GraphQL;
 
 namespace FWO.Test
 {
@@ -11,7 +12,7 @@ namespace FWO.Test
         {
             await DefaultInit.DoNothing(); // qad avoid compiler warning
             Type responseType = typeof(QueryResponseType);
-            if(responseType == typeof(List<WfExtState>))
+            if (responseType == typeof(List<WfExtState>))
             {
                 List<WfExtState>? extStates =
                 [
@@ -19,7 +20,7 @@ namespace FWO.Test
                     new(){ Id = 2, Name = "ExtReqRequested", StateId = 2 },
                     new(){ Id = 3, Name = "ExtReqDone", StateId = 631 }
                 ];
-                GraphQLResponse<dynamic> response = new(){ Data = extStates };
+                GraphQLResponse<dynamic> response = new() { Data = extStates };
                 return response.Data;
             }
 

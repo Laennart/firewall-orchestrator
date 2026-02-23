@@ -1,9 +1,11 @@
-using System.Net.Sockets;
-using System.Net;
-using NetTools;
 using System;
+using System.Net;
+using System.Net.Sockets;
 using System.Numerics;
+
 using DnsClient;
+
+using NetTools;
 
 namespace FWO.Basics
 {

@@ -1,6 +1,8 @@
-using FWO.Basics.Interfaces;
-using Newtonsoft.Json;
 using System.Text.Json.Serialization;
+
+using FWO.Basics.Interfaces;
+
+using Newtonsoft.Json;
 
 
 namespace FWO.Data
@@ -18,7 +20,7 @@ namespace FWO.Data
         {
 
         }
-        
+
         public ComplianceViolation(int id, ComplianceViolationBase baseObj)
         {
             Id = id;
@@ -88,7 +90,7 @@ namespace FWO.Data
         [JsonProperty("criterion"), JsonPropertyName("criterion")]
         public ComplianceCriterion? Criterion { get; set; }
 
-        public static ComplianceViolationBase CreateBase(ComplianceViolation violation )
+        public static ComplianceViolationBase CreateBase(ComplianceViolation violation)
         {
             return new()
             {
@@ -103,7 +105,7 @@ namespace FWO.Data
                 CriterionId = violation.CriterionId,
                 Criterion = violation.Criterion
             };
-            
+
         }
     }
 }

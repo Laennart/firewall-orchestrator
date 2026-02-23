@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization; 
+using System.Text.Json.Serialization;
+
 using Newtonsoft.Json;
 
 namespace FWO.Data.Workflow
@@ -9,10 +10,10 @@ namespace FWO.Data.Workflow
         public int? OwnerId { get; set; }
 
         public WfOwnerWriter()
-        {}
+        { }
 
         public WfOwnerWriter(FwoOwner owner)
-        { 
+        {
             OwnerId = owner.Id;
         }
     }

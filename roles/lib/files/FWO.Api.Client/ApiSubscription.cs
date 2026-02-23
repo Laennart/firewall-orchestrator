@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +20,7 @@ namespace FWO.Api.Client
             GC.SuppressFinalize(this);
         }
 
-        ~ ApiSubscription()
+        ~ApiSubscription()
         {
             if (disposed) return;
             Dispose(false);

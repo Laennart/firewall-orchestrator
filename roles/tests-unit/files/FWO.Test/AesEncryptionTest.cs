@@ -1,7 +1,10 @@
-﻿using FWO.Encryption;
+using System.Text;
+
+using FWO.Encryption;
+
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
-using System.Text;
+
 using Assert = NUnit.Framework.Assert;
 
 namespace FWO.Test
@@ -30,7 +33,7 @@ namespace FWO.Test
         [Test]
         public void TestEncryptDecryptRandomData()
         {
-            string tempKey = GenerateRandomString(32,32);
+            string tempKey = GenerateRandomString(32, 32);
             string randomPlaintext = GenerateRandomString(15, 100);
             string encryptedString = AesEnc.Encrypt(randomPlaintext, tempKey);
             string decryptedString = AesEnc.Decrypt(encryptedString, tempKey);

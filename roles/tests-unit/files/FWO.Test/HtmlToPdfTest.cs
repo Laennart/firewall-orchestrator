@@ -1,12 +1,14 @@
-using NUnit.Framework;
-using NUnit.Framework.Legacy;
+using FWO.Basics;
 using FWO.Logging;
-using PuppeteerSharp.Media;
-using PuppeteerSharp;
-using PuppeteerSharp.BrowserData;
 using FWO.Report;
 using FWO.Report.Data;
-using FWO.Basics;
+
+using NUnit.Framework;
+using NUnit.Framework.Legacy;
+
+using PuppeteerSharp;
+using PuppeteerSharp.BrowserData;
+using PuppeteerSharp.Media;
 
 namespace FWO.Test
 {
